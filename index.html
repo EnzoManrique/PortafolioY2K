@@ -1,50 +1,59 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enzo | Sistema Portafolio Y2K</title>
-    <!-- Incluimos Fira Code para una tipografía de estilo terminal / monospaced moderno -->
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+    <title>Enzo | Frutiger Aero Portfolio</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <!-- Capas de efectos CRT -->
-    <div class="crt-overlay"></div>
-    <div class="scanlines"></div>
-    
-    <!-- Contenedor principal de la "pantalla" -->
-    <div class="screen">
-        <header>
-            <div class="sys-info">
-                <span>BIOS DATE 01/01/00 12:00:00 VER 2.05</span>
-                <span>CPU: Intel(R) Pentium(R) III Processor</span>
-                <span>Memory Test: 262144K OK</span>
-                <br>
-                <span>Iniciando sistema operativo...</span>
+    <!-- Capa de Fondo Acuático con Burbujas -->
+    <div class="water-background">
+        <canvas id="bubble-canvas"></canvas>
+    </div>
+
+    <!-- Contenedor Principal (Ventana de Reproductor) -->
+    <div class="media-player-window">
+
+        <!-- Header de la ventana estilo SO de los 2000 -->
+        <div class="window-header">
+            <div class="window-title">
+                <span class="music-icon">🎵</span> Enzo_Portfolio_Player.exe
             </div>
-            <div class="greeting-container">
-                <span id="greeting"></span><span class="cursor">_</span>
+            <div class="window-controls">
+                <button class="win-btn minimize" aria-label="Minimizar"></button>
+                <button class="win-btn maximize" aria-label="Maximizar"></button>
+                <button class="win-btn close" aria-label="Cerrar"></button>
             </div>
-        </header>
-        
-        <main class="hidden" id="main-content">
-            <section class="menu">
-                <p>C:\PORTAFOLIO> DIR</p>
-                <br>
-                <p>El volumen de la unidad C no tiene etiqueta.</p>
-                <p>El número de serie del volumen es 1A2B-3C4D</p>
-                <br>
-                <p>Directorio de C:\PORTAFOLIO</p>
-                <ul>
-                    <li><a href="#about" aria-label="Sobre mí">[SOBRE_MI.EXE]</a></li>
-                    <li><a href="#projects" aria-label="Proyectos">[PROYECTOS.DIR]</a></li>
-                    <li><a href="#contact" aria-label="Contacto">[CONTACTO.TXT]</a></li>
-                </ul>
-            </section>
-        </main>
+        </div>
+
+        <!-- Área de Pantalla -->
+        <div class="screen-area">
+            <!-- Efecto de brillo de la pantalla -->
+            <div class="screen-glare"></div>
+            <div id="screen-content">
+                <!-- El contenido de JS se inyecta aquí -->
+            </div>
+        </div>
+
+        <!-- Controles y Botones (Glossy bar) -->
+        <div class="glass-nav-bar">
+            <button class="glossy-btn active" data-target="home">
+                <span class="icon">▶</span> <span class="btn-text">Inicio</span>
+            </button>
+            <button class="glossy-btn" data-target="projects">
+                <span class="icon">■</span> <span class="btn-text">Proyectos</span>
+            </button>
+            <button class="glossy-btn" data-target="contact">
+                <span class="icon">●</span> <span class="btn-text">Contacto</span>
+            </button>
+        </div>
+
     </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>
