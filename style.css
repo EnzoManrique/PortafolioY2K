@@ -1,0 +1,198 @@
+/* Importamos Fira Code para el aspecto de terminal */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
+
+:root {
+    --bg-color: #050505;
+    /* Opción Verde Neón (por defecto) - Para usar Ámbar, descomenta la siguiente línea y comenta el verde: */
+    --text-color: #39ff14; 
+    /* --text-color: #ffb000; */
+    
+    --scanline-color: rgba(0, 0, 0, 0.4);
+    --crt-flicker: rgba(57, 255, 20, 0.05); /* Cambia el color rgb si usas ámbar */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Fira Code', 'Courier New', Courier, monospace;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    /* Glow general para texto de monitor antiguo */
+    text-shadow: 0 0 4px var(--text-color);
+}
+
+/* Contenedor simulando la pantalla del monitor */
+.screen {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    height: 90vh;
+    background-color: #020202;
+    border: 2px solid #222;
+    border-radius: 16px;
+    padding: 30px;
+    overflow-y: auto;
+    /* Sombra exterior y resplandor interior */
+    box-shadow: 
+        0 0 40px rgba(57, 255, 20, 0.1), 
+        inset 0 0 30px rgba(57, 255, 20, 0.15);
+    /* Animación de parpadeo ligero del monitor */
+    animation: monitorFlicker 0.1s infinite alternate;
+}
+
+/* Líneas de escaneo horizontal (Scanlines) */
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0),
+        rgba(255,255,255,0) 50%,
+        var(--scanline-color) 50%,
+        var(--scanline-color)
+    );
+    background-size: 100% 4px;
+    pointer-events: none; /* Permite hacer clic a través de la capa */
+    z-index: 100;
+}
+
+/* Efecto de curvatura y viñeta CRT */
+.crt-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle, rgba(0,0,0,0) 60%, rgba(0,0,0,0.6) 100%);
+    pointer-events: none;
+    z-index: 101;
+    box-shadow: inset 0 0 80px rgba(0,0,0,0.9);
+}
+
+/* Textos de sistema BIOS */
+.sys-info {
+    font-size: 0.85rem;
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: #00aa00; /* Verde más oscuro o apagado */
+    text-shadow: none; /* Sin glow para que parezca texto de fondo */
+    opacity: 0.8;
+}
+
+/* Contenedor del saludo inicial animado */
+.greeting-container {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    min-height: 4.5rem; /* Evita que el layout salte cuando termine de escribir */
+}
+
+/* Cursor parpadeante */
+.cursor {
+    font-weight: bold;
+    animation: blink 1s step-end infinite;
+}
+
+/* Clases de utilidad para transiciones */
+.hidden {
+    display: none;
+    opacity: 0;
+}
+
+.visible {
+    display: block;
+    animation: fadeIn 1.5s forwards;
+}
+
+.menu p {
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+.menu ul {
+    list-style-type: none;
+    margin-top: 25px;
+}
+
+.menu li {
+    margin-bottom: 15px;
+}
+
+.menu a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.2rem;
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+/* Efectos hover muy retro, invierte los colores */
+.menu a:hover, .menu a:focus {
+    color: var(--bg-color);
+    background-color: var(--text-color);
+    border: 1px solid var(--text-color);
+    box-shadow: 0 0 15px var(--text-color);
+    outline: none;
+    text-shadow: none;
+}
+
+.menu a::before {
+    content: '> ';
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.menu a:hover::before {
+    opacity: 1;
+    color: var(--bg-color);
+}
+
+/* KEYFRAMES */
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+@keyframes monitorFlicker {
+    0% { opacity: 0.95; }
+    100% { opacity: 1; text-shadow: 0 0 7px var(--text-color); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Personalización del Scrollbar Chromium para aspecto terminal */
+::-webkit-scrollbar {
+    width: 14px;
+}
+::-webkit-scrollbar-track {
+    background: #050505;
+    border-left: 1px solid #111;
+}
+::-webkit-scrollbar-thumb {
+    background: #1a1a1a;
+    border: 1px solid var(--text-color);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-color);
+}

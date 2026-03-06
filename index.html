@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enzo | Sistema Portafolio Y2K</title>
+    <!-- Incluimos Fira Code para una tipografía de estilo terminal / monospaced moderno -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Capas de efectos CRT -->
+    <div class="crt-overlay"></div>
+    <div class="scanlines"></div>
+    
+    <!-- Contenedor principal de la "pantalla" -->
+    <div class="screen">
+        <header>
+            <div class="sys-info">
+                <span>BIOS DATE 01/01/00 12:00:00 VER 2.05</span>
+                <span>CPU: Intel(R) Pentium(R) III Processor</span>
+                <span>Memory Test: 262144K OK</span>
+                <br>
+                <span>Iniciando sistema operativo...</span>
+            </div>
+            <div class="greeting-container">
+                <span id="greeting"></span><span class="cursor">_</span>
+            </div>
+        </header>
+        
+        <main class="hidden" id="main-content">
+            <section class="menu">
+                <p>C:\PORTAFOLIO> DIR</p>
+                <br>
+                <p>El volumen de la unidad C no tiene etiqueta.</p>
+                <p>El número de serie del volumen es 1A2B-3C4D</p>
+                <br>
+                <p>Directorio de C:\PORTAFOLIO</p>
+                <ul>
+                    <li><a href="#about" aria-label="Sobre mí">[SOBRE_MI.EXE]</a></li>
+                    <li><a href="#projects" aria-label="Proyectos">[PROYECTOS.DIR]</a></li>
+                    <li><a href="#contact" aria-label="Contacto">[CONTACTO.TXT]</a></li>
+                </ul>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
