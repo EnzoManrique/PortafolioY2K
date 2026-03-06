@@ -16,7 +16,7 @@ const contentData = {
             <div class="msn-header">
                 <div class="msn-avatar-container">
                     <div class="msn-avatar">
-                        <img src="" alt="">
+                        <img src="assets/img/mi-avatar.jpeg" alt="Avatar de Enzo">
                     </div>
                     <div class="msn-status-dot"></div>
                 </div>
@@ -92,31 +92,59 @@ const contentData = {
         </div>
     `,
     projects: `
-        <h1 class="aero-title">Mis Proyectos</h1>
-        
-        <div class="project-card">
-            <div class="project-header">
-                <h2>Simulador de Fichas de Póker</h2>
-                <span class="status-badge">Finalizado V1.0</span>
+        <div class="explorer-container">
+            <!-- 1. Barra de Navegación Superior -->
+            <div class="explorer-toolbar">
+                <div class="explorer-address-bar">
+                    <span class="explorer-folder-icon">📁</span>
+                    <span class="explorer-path">C:\\SISTEMA\\PORTAFOLIO\\PROYECTOS</span>
+                </div>
+                <div class="explorer-view-controls">
+                    <button class="explorer-btn" title="Vista de Miniaturas">▀</button>
+                    <button class="explorer-btn active" title="Vista de Detalles">≡</button>
+                    <button class="explorer-btn" title="Opciones">▼</button>
+                </div>
             </div>
-            <p>Una aplicación robusta para la gestión y simulación de stacks de fichas de póker. Permite visualizar, calcular balances y organizar distribuciones de fichas con exactitud matemática.</p>
-            <div class="tags">
-                <span class="tag">Java</span>
-                <span class="tag">Spring Boot</span>
-                <span class="tag">Backend</span>
-            </div>
-        </div>
-        
-        <div class="project-card">
-            <div class="project-header">
-                <h2>Portafolio Frutiger Aero</h2>
-                <span class="status-badge active">En Desarrollo</span>
-            </div>
-            <p>Diseño de interfaz de usuario inmersiva inspirada en la estética del software de mediados de los 2000, incorporando elementos acuáticos, botones glossy interactivos, vidrio translúcido ("Aero Glass") y animaciones en Canvas puro.</p>
-            <div class="tags">
-                <span class="tag">HTML5</span>
-                <span class="tag">CSS3 (Diseño UI/UX)</span>
-                <span class="tag">Vanilla JS</span>
+
+            <!-- Área desplazable del explorador -->
+            <div class="explorer-content-area">
+                <!-- 2. Cuadrícula de Archivos (Grid de Proyectos) -->
+                <div class="explorer-grid">
+                    
+                    <!-- Archivo 1 -->
+                    <div class="explorer-item">
+                        <div class="explorer-icon-box">
+                            <img src="" alt="" class="explorer-placeholder-icon" style="background: linear-gradient(135deg, #ff9a9a, #ff0000);">
+                        </div>
+                        <div class="explorer-item-details">
+                            <span class="explorer-item-name">Simulador_Fichas.exe</span>
+                            <span class="explorer-item-type">Tipo: App Java</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Archivo 2 -->
+                    <div class="explorer-item">
+                        <div class="explorer-icon-box">
+                            <img src="" alt="" class="explorer-placeholder-icon" style="background: linear-gradient(135deg, #a8ff78, #78ffd6);">
+                        </div>
+                        <div class="explorer-item-details">
+                            <span class="explorer-item-name">API_Backend.jar</span>
+                            <span class="explorer-item-type">Tipo: Spring Boot</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Archivo 3 -->
+                    <div class="explorer-item">
+                        <div class="explorer-icon-box">
+                            <img src="" alt="" class="explorer-placeholder-icon" style="background: linear-gradient(135deg, #74ebd5, #9face6);">
+                        </div>
+                        <div class="explorer-item-details">
+                            <span class="explorer-item-name">Portafolio.sys</span>
+                            <span class="explorer-item-type">Tipo: Frontend Puro</span>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     `,
