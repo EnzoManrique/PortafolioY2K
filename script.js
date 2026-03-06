@@ -11,12 +11,84 @@ document.addEventListener("DOMContentLoaded", () => {
 // Contorno de HTML en template strings para cada sección
 const contentData = {
     home: `
-        <h1 class="aero-title">¡Hola! Soy Enzo</h1>
-        <div class="aero-content-box">
-            <p>Bienvenido a mi portafolio personal. Soy desarrollador de software con una pasión por crear sistemas limpios, eficientes y estéticamente agradables.</p>
-            <p>Explora mis proyectos y descubre lo que he estado construyendo utilizando diversas tecnologías, desde <strong>Java y Spring Boot</strong> hasta desarrollo web moderno interactivo.</p>
-            <br>
-            <p><i>Selecciona una opción en el reproductor en la parte inferior para continuar...</i></p>
+        <div class="msn-container">
+            <!-- 1. Encabezado de Perfil (Estilo MSN) -->
+            <div class="msn-header">
+                <div class="msn-avatar-container">
+                    <div class="msn-avatar">
+                        <img src="" alt="">
+                    </div>
+                    <div class="msn-status-dot"></div>
+                </div>
+                
+                <div class="msn-info">
+                    <h2 class="msn-nickname">Enzo <span class="msn-status-text">(Conectado)</span></h2>
+                    <p class="msn-personal-msg">🚀 Construyendo código en Java y Spring || Buscando mi primer rol en IT || Games & Code 24/7</p>
+                    <p class="msn-listening-msg">🎵 Escuchando: Here Come The Sun - Remastered 2009 - The Beatles || 🎮 Counter-Strike (Dust 2)</p>
+                </div>
+            </div>
+
+            <!-- 2. Ventana de Historial de Chat (La Biografía) -->
+            <div class="msn-chat-window">
+                <div class="msn-chat-scroll">
+                    <div class="msn-chat-nudge">
+                        <span style="color:gray">(Zumbido)</span> Enzo te acaba de enviar un zumbido!
+                    </div>
+                    
+                    <div class="msn-msg-group">
+                        <span class="msn-sender">Enzo dice:</span>
+                        <div class="msn-bubble">
+                            ¡Hola! Soy desarrollador backend especializado en Java y el ecosistema Spring. Me apasiona resolver problemas lógicos y crear estructuras robustas.
+                        </div>
+                    </div>
+                    
+                    <div class="msn-msg-group">
+                        <span class="msn-sender">Enzo dice:</span>
+                        <div class="msn-bubble">
+                            Mi formación combina lo mejor de dos mundos: la base analítica de la Licenciatura en Sistemas 
+                            (estoy cursando el 4to año en la Univ. Champagnat)
+                            y la agilidad práctica de un Bootcamp Full Stack de 600hs.
+                        </div>
+                    </div>
+                    
+                    <div class="msn-msg-group">
+                        <span class="msn-sender">Enzo dice:</span>
+                        <div class="msn-bubble">
+                            A nivel tecnológico, mi terreno natural es el Backend: respiro Java, Spring Boot, PHP y SQL (MySQL), y 
+                            actualmente estoy integrando Docker y Spring Security a mi arsenal. Para el Front-End, soy cien por ciento práctico: 
+                            me apalanco fuertemente en herramientas de IA Generativa. Esto me permite prototipar interfaces ágiles y funcionales en tiempo récord,
+                            dejándome libre para concentrarme en lo que realmente importa: la lógica de negocio, la arquitectura y los datos
+                        </div>
+                    </div>
+
+                    <div class="msn-msg-group">
+                        <span class="msn-sender">Enzo dice:</span>
+                        <div class="msn-bubble">
+                            Tengo un perfil técnico dual. Por un lado, me encanta construir soluciones desde cero y por el otro, disfruto muchísimo analizando y 
+                            optimizando procesos que ya existen, buscando
+                            fallos y usando herramientas de IA para hacer los sistemas más eficientes.
+                        </div>
+                    </div>
+                    
+                    <div class="msn-msg-group">
+                        <span class="msn-sender">Enzo dice:</span>
+                        <div class="msn-bubble">
+                            Creo firmemente en la mejora continua. Cuando no estoy tirando código, estoy metido de lleno perfeccionando mi inglés técnico
+                            (actualmente nivel A2) en el Master English Center.
+                        </div>
+                    </div>
+
+                    <div class="msn-msg-group">
+                        <span class="msn-sender">Enzo dice:</span>
+                        <div class="msn-bubble">
+                            Y cuando finalmente me desconecto de las pantallas... , me conecto a otras. Soy un gran fan de la 
+                            fotografía y del buen cine. En mis ratos libres me vas a encontrar rankeando en Counter-Strike
+                            o relajando la mente mientras mezclo un poco de Tech House y Trance
+                        </div>
+                    </div>    
+                    
+                </div>
+            </div>
         </div>
     `,
     projects: `
@@ -158,14 +230,14 @@ function initBubbles() {
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
 
             // 1. Borde de la burbuja (Aero style stroke)
-            ctx.strokeStyle = \`rgba(255, 255, 255, \${this.opacity + 0.15})\`;
+            ctx.strokeStyle = `rgba(255, 255, 255, ${this.opacity + 0.15})`;
             ctx.lineWidth = 1;
             ctx.stroke();
-            
+
             // 2. Destello súper intenso (Glare de burbuja Frutiger) en superior-izquierda
             ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size * 0.75, -Math.PI, -Math.PI/2.5);
-            ctx.strokeStyle = \`rgba(255, 255, 255, \${this.opacity + 0.4})\`;
+            ctx.arc(this.x, this.y, this.size * 0.75, -Math.PI, -Math.PI / 2.5);
+            ctx.strokeStyle = `rgba(255, 255, 255, ${this.opacity + 0.4})`;
             ctx.lineWidth = this.size * 0.15;
             ctx.lineCap = 'round';
             ctx.stroke();
@@ -175,9 +247,9 @@ function initBubbles() {
                 this.x - this.size * 0.2, this.y - this.size * 0.2, this.size * 0.05,
                 this.x, this.y, this.size
             );
-            gradient.addColorStop(0, \`rgba(255, 255, 255, \${this.opacity * 0.8})\`);
-            gradient.addColorStop(1, \`rgba(255, 255, 255, 0)\`);
-            
+            gradient.addColorStop(0, `rgba(255, 255, 255, ${this.opacity * 0.8})`);
+            gradient.addColorStop(1, `rgba(255, 255, 255, 0)`);
+
             ctx.fillStyle = gradient;
             ctx.fill();
         }
@@ -190,12 +262,12 @@ function initBubbles() {
     function animate() {
         // Redibujar fondo transparente
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
+
         bubbles.forEach(bubble => {
             bubble.update();
             bubble.draw();
         });
-        
+
         requestAnimationFrame(animate);
     }
 
