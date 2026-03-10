@@ -204,7 +204,7 @@ function initNavigation() {
 // Base de datos de proyectos simulada
 const projectsDb = {
     'simulador-fichas': {
-        windowTitle: 'Detalles del Proyecto: Simulador_Fichas.exe (App Java)',
+        windowTitle: 'Detalles del Proyecto: Simulador_Fichas.exe',
         mainTitle: 'Simulador de Fichas de Póker',
         description: 'Una aplicación robusta para la gestión y simulación de stacks de fichas de póker. Permite visualizar, calcular balances y organizar distribuciones de fichas con exactitud matemática orientada a torneos de póker texas holdem.',
         techStack: 'Java (Spring Boot), Hibernate, PostgreSQL, JWT, Docker, Git.',
@@ -213,10 +213,22 @@ const projectsDb = {
         docLink: '#'
     },
     'gestor-stock': {
-        windowTitle: 'Detalles del Proyecto: Gestor_Stock.php (App Web)',
+        windowTitle: 'Detalles del Proyecto: Gestor_Stock.php',
         mainTitle: 'Gestor Stock e Inventario',
-        description: 'Sistema web integral para la administración, altas, bajas, modificaciones y tracking de inventario en tiempo real. Construido usando una arquitectura MVC tradicional cliente-servidor optimizada para negocios.',
-        techStack: 'PHP nativo, MySQL (PhpMyAdmin), HTML5, CSS3, JavaScript (Vanilla).',
+        description: `Este sistema de Gestión de Ventas y Control de Inventario nace desde un proyecto academico, ha sido diseñado como una solución web integral para negocios
+        con el propósito principal de digitalizar la operación comercial, garantizar la integridad del stock
+        y ofrecer reportes precisos para la toma de decisiones.<br><br>
+        <b>Gestión de Inventario:</b> Control detallado con alertas automáticas cuando las existencias son bajas.<br><br>
+        <b>Operación de Ventas:</b> Registro multi-producto con cálculo automático de totales y validación de disponibilidad en tiempo real.<br><br>
+        <b>Administración de Accesos:</b> Estructura basada en roles para separar las funciones del Administrador (control total) de las del Empleado (operativo).<br><br>
+        El proyecto sigue el patrón de diseño MVC (Modelo-Vista-Controlador), lo que separa la lógica de negocio de la interfaz de usuario, facilitando el mantenimiento.
+        <b>Stack Tecnológico:</b> Combina un frontend dinámico en JavaScript (AJAX/Fetch) con un backend en PHP 7.4 y una base de datos MySQL 8.0. <br><br>
+        <b>Comunicación:</b> Utiliza peticiones asíncronas para actualizar la información sin necesidad de recargar la página completa, mejorando la experiencia del usuario.<br><br>
+        El núcleo del sistema utiliza MySQL 8.0 bajo un modelo normalizado para eliminar redundancias. La lógica de negocio no solo reside en el código, sino que está integrada en la base de datos mediante:<br><br> 
+        -Triggers antes y despues de realizar una venta para validar y descontar stock, calcular subtotales y actualizar el total de la venta. <br><br>
+        -Vistas para generar reportes consolidados y alertas automáticas de stock bajo para el Dashboard
+        -Procedimientos guardados que optimizan el cálculo de ganancias netas y facturación por rangos de fechas en una sola consulta<br><br>`,
+        techStack: 'PHP nativo, MySQL, HTML5, CSS3, JavaScript (Vanilla).',
         role: 'Desarrollador Full Stack Jr.',
         githubLink: '#',
         docLink: '#'
@@ -256,7 +268,7 @@ function initProyectosModal() {
                     // Update DOM
                     modalWindowTitle.innerHTML = `<span class="icon">📄</span> ${pData.windowTitle}`;
                     modalMainTitle.textContent = pData.mainTitle;
-                    modalDescText.textContent = pData.description;
+                    modalDescText.innerHTML = pData.description;
                     modalTechStack.innerHTML = `<strong>Pila Tecnológica:</strong> ${pData.techStack}`;
                     modalRole.innerHTML = `<strong>Rol:</strong> ${pData.role}`;
                 }
