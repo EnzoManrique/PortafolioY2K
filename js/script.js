@@ -112,7 +112,7 @@ const contentData = {
                 <div class="explorer-grid">
                     
                     <!-- Archivo 1 -->
-                    <div class="explorer-item">
+                    <div class="explorer-item" data-id="simulador-fichas">
                         <div class="explorer-icon-box">
                             <img src="" alt="" class="explorer-placeholder-icon" style="background: linear-gradient(135deg, #ff9a9a, #ff0000);">
                         </div>
@@ -123,7 +123,7 @@ const contentData = {
                     </div>
                     
                     <!-- Archivo 2 -->
-                    <div class="explorer-item">
+                    <div class="explorer-item" data-id="gestor-stock">
                         <div class="explorer-icon-box">
                             <img src="" alt="" class="explorer-placeholder-icon" style="background: linear-gradient(135deg, #a8ff78, #78ffd6);">
                         </div>
@@ -134,7 +134,7 @@ const contentData = {
                     </div>
                     
                     <!-- Archivo 3 -->
-                    <div class="explorer-item">
+                    <div class="explorer-item" data-id="ttm-apk">
                         <div class="explorer-icon-box">
                             <img src="" alt="" class="explorer-placeholder-icon" style="background: linear-gradient(135deg, #74ebd5, #9face6);">
                         </div>
@@ -201,16 +201,66 @@ function initNavigation() {
     });
 }
 
+// Base de datos de proyectos simulada
+const projectsDb = {
+    'simulador-fichas': {
+        windowTitle: 'Detalles del Proyecto: Simulador_Fichas.exe (App Java)',
+        mainTitle: 'Simulador de Fichas de Póker',
+        description: 'Una aplicación robusta para la gestión y simulación de stacks de fichas de póker. Permite visualizar, calcular balances y organizar distribuciones de fichas con exactitud matemática orientada a torneos de póker texas holdem.',
+        techStack: 'Java (Spring Boot), Hibernate, PostgreSQL, JWT, Docker, Git.',
+        role: 'Desarrollador Backend Independiente',
+        githubLink: '#',
+        docLink: '#'
+    },
+    'gestor-stock': {
+        windowTitle: 'Detalles del Proyecto: Gestor_Stock.php (App Web)',
+        mainTitle: 'Gestor Stock e Inventario',
+        description: 'Sistema web integral para la administración, altas, bajas, modificaciones y tracking de inventario en tiempo real. Construido usando una arquitectura MVC tradicional cliente-servidor optimizada para negocios.',
+        techStack: 'PHP nativo, MySQL (PhpMyAdmin), HTML5, CSS3, JavaScript (Vanilla).',
+        role: 'Desarrollador Full Stack Jr.',
+        githubLink: '#',
+        docLink: '#'
+    },
+    'ttm-apk': {
+        windowTitle: 'Detalles del Proyecto: TTM.apk (App Android)',
+        mainTitle: 'TTM - Trailer Tracker Manager',
+        description: 'Aplicación nativa para Android diseñada para la logística, seguimiento, mantenimiento y control de unidades de transporte pesado (trailers). Pensada para uso offline con sincronización local de bases de datos.',
+        techStack: 'Kotlin, Jetpack Compose, UI Material 3, Room Database, Coroutines.',
+        role: 'Desarrollador Android Mobile',
+        githubLink: '#',
+        docLink: '#'
+    }
+};
+
 // Inicialización de Modal (Proyectos)
 function initProyectosModal() {
     const modalOverlay = document.getElementById('project-modal-overlay');
     const closeBtn = document.getElementById('close-modal-btn');
+
+    // Referencias a los elementos del modal a rellenar dinámicamente
+    const modalWindowTitle = document.querySelector('.modal-title');
+    const modalMainTitle = document.querySelector('.modal-main-title');
+    const modalDescText = document.querySelector('.modal-desc-text');
+    const modalTechStack = document.querySelector('.modal-specs-box p:nth-child(1)');
+    const modalRole = document.querySelector('.modal-specs-box p:nth-child(2)');
 
     // Función para añadir los event listeners iterando los items cada vez que se carga la pestaña
     function attachItemListeners() {
         const items = document.querySelectorAll('.explorer-item');
         items.forEach(item => {
             item.addEventListener('click', () => {
+                const projectId = item.getAttribute('data-id');
+                const pData = projectsDb[projectId];
+
+                if (pData) {
+                    // Update DOM
+                    modalWindowTitle.innerHTML = `<span class="icon">📄</span> ${pData.windowTitle}`;
+                    modalMainTitle.textContent = pData.mainTitle;
+                    modalDescText.textContent = pData.description;
+                    modalTechStack.innerHTML = `<strong>Pila Tecnológica:</strong> ${pData.techStack}`;
+                    modalRole.innerHTML = `<strong>Rol:</strong> ${pData.role}`;
+                }
+
                 modalOverlay.classList.remove('hidden');
             });
         });
