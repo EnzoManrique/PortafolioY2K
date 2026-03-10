@@ -128,8 +128,8 @@ const contentData = {
                             <img src="" alt="" class="explorer-placeholder-icon" style="background: linear-gradient(135deg, #a8ff78, #78ffd6);">
                         </div>
                         <div class="explorer-item-details">
-                            <span class="explorer-item-name">API_Backend.jar</span>
-                            <span class="explorer-item-type">Tipo: Spring Boot</span>
+                            <span class="explorer-item-name">Gestor Stock e Inventario.php</span>
+                            <span class="explorer-item-type">Tipo:PHP y MySQL</span>
                         </div>
                     </div>
                     
@@ -139,8 +139,8 @@ const contentData = {
                             <img src="" alt="" class="explorer-placeholder-icon" style="background: linear-gradient(135deg, #74ebd5, #9face6);">
                         </div>
                         <div class="explorer-item-details">
-                            <span class="explorer-item-name">Portafolio.sys</span>
-                            <span class="explorer-item-type">Tipo: Frontend Puro</span>
+                            <span class="explorer-item-name">TTM.apk</span>
+                            <span class="explorer-item-type">Tipo: App Android</span>
                         </div>
                     </div>
 
@@ -175,6 +175,11 @@ function loadContent(target) {
 
         // Reset scroll position on content load
         screenContent.scrollTop = 0;
+
+        // Si cargamos la pantalla de proyectos, reinicializar botones de detalles (Modal)
+        if (target === 'projects') {
+            updateModalListeners();
+        }
     }, 200);
 }
 
@@ -195,6 +200,40 @@ function initNavigation() {
         });
     });
 }
+
+// Inicialización de Modal (Proyectos)
+function initProyectosModal() {
+    const modalOverlay = document.getElementById('project-modal-overlay');
+    const closeBtn = document.getElementById('close-modal-btn');
+
+    // Función para añadir los event listeners iterando los items cada vez que se carga la pestaña
+    function attachItemListeners() {
+        const items = document.querySelectorAll('.explorer-item');
+        items.forEach(item => {
+            item.addEventListener('click', () => {
+                modalOverlay.classList.remove('hidden');
+            });
+        });
+    }
+
+    // Listener para botón de cerrar y fuera de la caja
+    if (closeBtn && modalOverlay) {
+        closeBtn.addEventListener('click', () => {
+            modalOverlay.classList.add('hidden');
+        });
+
+        // Cerrar si se hace click fuera de la ventana en el overlay oscurecido
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                modalOverlay.classList.add('hidden');
+            }
+        });
+    }
+
+    return attachItemListeners;
+}
+
+const updateModalListeners = initProyectosModal();
 
 // Sistema de Partículas Avanzado - Burbujas Acuáticas Subiendo (Canvas)
 function initBubbles() {
