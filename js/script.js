@@ -210,7 +210,8 @@ const projectsDb = {
         techStack: 'Java (Spring Boot), Hibernate, PostgreSQL, JWT, Docker, Git.',
         role: 'Desarrollador Backend Independiente',
         githubLink: '#',
-        docLink: '#'
+        docLink: '#',
+        images: [] // Sin imágenes todavía, usará placeholders
     },
     'gestor-stock': {
         windowTitle: 'Detalles del Proyecto: Gestor_Stock.php',
@@ -231,7 +232,12 @@ const projectsDb = {
         techStack: 'PHP nativo, MySQL, HTML5, CSS3, JavaScript (Vanilla).',
         role: 'Desarrollador Full Stack Jr.',
         githubLink: '#',
-        docLink: '#'
+        docLink: '#',
+        images: [
+            'assets/img/proyectoUch/index.png',
+            'assets/img/proyectoUch/inventario.png',
+            'assets/img/proyectoUch/realizarVenta.png'
+        ]
     },
     'ttm-apk': {
         windowTitle: 'Detalles del Proyecto: TTM.apk (App Android)',
@@ -240,7 +246,8 @@ const projectsDb = {
         techStack: 'Kotlin, Jetpack Compose, UI Material 3, Room Database, Coroutines.',
         role: 'Desarrollador Android Mobile',
         githubLink: '#',
-        docLink: '#'
+        docLink: '#',
+        images: []
     }
 };
 
@@ -255,6 +262,7 @@ function initProyectosModal() {
     const modalDescText = document.querySelector('.modal-desc-text');
     const modalTechStack = document.querySelector('.modal-specs-box p:nth-child(1)');
     const modalRole = document.querySelector('.modal-specs-box p:nth-child(2)');
+    const modalGalleryGrid = document.querySelector('.modal-gallery-grid');
 
     // Función para añadir los event listeners iterando los items cada vez que se carga la pestaña
     function attachItemListeners() {
@@ -271,6 +279,26 @@ function initProyectosModal() {
                     modalDescText.innerHTML = pData.description;
                     modalTechStack.innerHTML = `<strong>Pila Tecnológica:</strong> ${pData.techStack}`;
                     modalRole.innerHTML = `<strong>Rol:</strong> ${pData.role}`;
+
+                    // Actualizar Galería
+                    if (pData.images && pData.images.length > 0) {
+                        modalGalleryGrid.innerHTML = `
+                            <div class="gallery-main-img" style="background-image: url('${pData.images[0]}'); background-size: cover; background-position: top center; border: 1px solid rgba(135,206,250,0.8); box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></div>
+                            <div class="gallery-side-imgs">
+                                <div class="gallery-thumb" style="background-image: url('${pData.images[1]}'); background-size: cover; background-position: top center; border: 1px solid rgba(135,206,250,0.8); box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></div>
+                                <div class="gallery-thumb" style="background-image: url('${pData.images[2]}'); background-size: cover; background-position: top center; border: 1px solid rgba(135,206,250,0.8); box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></div>
+                            </div>
+                        `;
+                    } else {
+                        // Renderizar placeholders por defecto
+                        modalGalleryGrid.innerHTML = `
+                            <div class="gallery-main-img placeholder-glare"></div>
+                            <div class="gallery-side-imgs">
+                                <div class="gallery-thumb placeholder-glare"></div>
+                                <div class="gallery-thumb placeholder-glare"></div>
+                            </div>
+                        `;
+                    }
                 }
 
                 modalOverlay.classList.remove('hidden');
