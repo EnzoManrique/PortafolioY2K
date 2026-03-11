@@ -125,6 +125,30 @@
         </div>
     </div>
 
+    <!-- Capa 4: Modal de Galería de Imágenes (Aero) -->
+    <div id="gallery-modal-overlay" class="modal-overlay hidden" style="z-index: 10000;">
+        <div class="aero-modal-window gallery-window"
+            style="width: 95%; max-width: 1200px; max-height: 95vh; flex-direction: row; background: rgba(0, 0, 0, 0.4); border: 2px solid rgba(135, 206, 250, 0.6); box-shadow: 0 0 30px rgba(0,0,0,0.8), inset 0 0 20px rgba(255,255,255,0.2);">
+
+            <button class="gallery-nav-btn" id="gallery-prev-btn" title="Anterior">&lt;</button>
+
+            <div class="gallery-img-container">
+                <div class="gallery-header"
+                    style="position: absolute; top: 15px; right: 15px; z-index: 10001; display:flex; gap:15px; align-items:center;">
+                    <span id="gallery-counter"
+                        style="color: white; font-weight: bold; text-shadow: 1px 1px 3px black; font-family: 'Segoe UI', sans-serif;">1
+                        / 5</span>
+                    <button class="modal-close-btn" id="close-gallery-btn" aria-label="Cerrar Galería">X</button>
+                </div>
+                <!-- Imagen renderizada dinamicamente -->
+                <img id="gallery-full-img" src="" alt="Captura de Proyecto" />
+            </div>
+
+            <button class="gallery-nav-btn" id="gallery-next-btn" title="Siguiente">&gt;</button>
+
+        </div>
+    </div>
+
     <script src="js/script.js"></script>
 </body>
 

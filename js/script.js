@@ -236,7 +236,10 @@ const projectsDb = {
         images: [
             'assets/img/proyectoUch/index.png',
             'assets/img/proyectoUch/inventario.png',
-            'assets/img/proyectoUch/realizarVenta.png'
+            'assets/img/proyectoUch/realizarVenta.png',
+            'assets/img/proyectoUch/clientes.png',
+            'assets/img/proyectoUch/estadisticas.png',
+            'assets/img/proyectoUch/ventas.png'
         ]
     },
     'ttm-apk': {
@@ -282,17 +285,34 @@ function initProyectosModal() {
 
                     // Actualizar Galería
                     if (pData.images && pData.images.length > 0) {
-                        modalGalleryGrid.innerHTML = `
-                            <div class="gallery-main-img" style="background-image: url('${pData.images[0]}'); background-size: cover; background-position: top center; border: 1px solid rgba(135,206,250,0.8); box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></div>
-                            <div class="gallery-side-imgs">
-                                <div class="gallery-thumb" style="background-image: url('${pData.images[1]}'); background-size: cover; background-position: top center; border: 1px solid rgba(135,206,250,0.8); box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></div>
-                                <div class="gallery-thumb" style="background-image: url('${pData.images[2]}'); background-size: cover; background-position: top center; border: 1px solid rgba(135,206,250,0.8); box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></div>
-                            </div>
-                        `;
+                        // Pasamos el array de imagenes en json a las miniaturas a través de atributos de datos
+                        const imgsJson = encodeURIComponent(JSON.stringify(pData.images));
+
+                        // Si hay al menos 1 imagen
+                        let mainImgHtml = `<div class="gallery-main-img" onclick="openGallery('${imgsJson}', 0)" style="background-image: url('${pData.images[0]}'); background-size: cover; background-position: top center; border: 1px solid rgba(135,206,250,0.8); box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></div>`;
+                        let sideImgsHtml = '<div class="gallery-side-imgs">';
+
+                        // Si hay al menos 2 imágenes
+                        if (pData.images.length >= 2) {
+                            sideImgsHtml += `<div class="gallery-thumb" onclick="openGallery('${imgsJson}', 1)" style="background-image: url('${pData.images[1]}'); background-size: cover; background-position: top center; border: 1px solid rgba(135,206,250,0.8); box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></div>`;
+                        } else {
+                            sideImgsHtml += `<div class="gallery-thumb placeholder-glare"></div>`;
+                        }
+
+                        // Si hay al menos 3 imágenes
+                        if (pData.images.length >= 3) {
+                            sideImgsHtml += `<div class="gallery-thumb" onclick="openGallery('${imgsJson}', 2)" style="background-image: url('${pData.images[2]}'); background-size: cover; background-position: top center; border: 1px solid rgba(135,206,250,0.8); box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></div>`;
+                        } else {
+                            sideImgsHtml += `<div class="gallery-thumb placeholder-glare"></div>`;
+                        }
+
+                        sideImgsHtml += '</div>';
+                        modalGalleryGrid.innerHTML = mainImgHtml + sideImgsHtml;
+
                     } else {
                         // Renderizar placeholders por defecto
                         modalGalleryGrid.innerHTML = `
-                            <div class="gallery-main-img placeholder-glare"></div>
+                            <div class="gallery-main-img placeholder-glare" onclick="alert('No hay capturas disponibles aún')"></div>
                             <div class="gallery-side-imgs">
                                 <div class="gallery-thumb placeholder-glare"></div>
                                 <div class="gallery-thumb placeholder-glare"></div>
@@ -324,6 +344,83 @@ function initProyectosModal() {
 }
 
 const updateModalListeners = initProyectosModal();
+
+// ===================================
+// Lógica de Galería de Imágenes Flotante
+// ===================================
+
+let currentGalleryImages = [];
+let currentGalleryIndex = 0;
+
+const galleryOverlay = document.getElementById('gallery-modal-overlay');
+const galleryFullImg = document.getElementById('gallery-full-img');
+const galleryCounter = document.getElementById('gallery-counter');
+const galleryPrevBtn = document.getElementById('gallery-prev-btn');
+const galleryNextBtn = document.getElementById('gallery-next-btn');
+const closeGalleryBtn = document.getElementById('close-gallery-btn');
+
+function updateGalleryView() {
+    if (currentGalleryImages.length === 0) return;
+
+    // Desvanecer imagen actual
+    galleryFullImg.style.opacity = '0';
+
+    setTimeout(() => {
+        galleryFullImg.src = currentGalleryImages[currentGalleryIndex];
+        galleryCounter.textContent = `${currentGalleryIndex + 1} / ${currentGalleryImages.length}`;
+
+        // Mostrar imagen nueva suavemente
+        galleryFullImg.style.opacity = '1';
+    }, 150);
+}
+
+// Global function to be called from html string
+window.openGallery = function (imagesJsonEnconded, startIndex) {
+    try {
+        currentGalleryImages = JSON.parse(decodeURIComponent(imagesJsonEnconded));
+        currentGalleryIndex = startIndex;
+
+        if (currentGalleryImages.length > 0) {
+            updateGalleryView();
+            galleryOverlay.classList.remove('hidden');
+        }
+    } catch (e) {
+        console.error("Error abriendo galería", e);
+    }
+}
+
+// Botones navegación galería
+if (galleryPrevBtn) {
+    galleryPrevBtn.addEventListener('click', () => {
+        if (currentGalleryImages.length > 0) {
+            currentGalleryIndex = (currentGalleryIndex - 1 + currentGalleryImages.length) % currentGalleryImages.length;
+            updateGalleryView();
+        }
+    });
+}
+
+if (galleryNextBtn) {
+    galleryNextBtn.addEventListener('click', () => {
+        if (currentGalleryImages.length > 0) {
+            currentGalleryIndex = (currentGalleryIndex + 1) % currentGalleryImages.length;
+            updateGalleryView();
+        }
+    });
+}
+
+// Cerrar Galeria
+if (closeGalleryBtn && galleryOverlay) {
+    closeGalleryBtn.addEventListener('click', () => {
+        galleryOverlay.classList.add('hidden');
+    });
+
+    galleryOverlay.addEventListener('click', (e) => {
+        // Cierra si se hace clic explicitamente en el overlay de fondo, fuera de la imagen
+        if (e.target === galleryOverlay) {
+            galleryOverlay.classList.add('hidden');
+        }
+    });
+}
 
 // Sistema de Partículas Avanzado - Burbujas Acuáticas Subiendo (Canvas)
 function initBubbles() {
