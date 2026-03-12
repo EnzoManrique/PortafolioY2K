@@ -150,16 +150,87 @@ const contentData = {
     `,
     contact: `
         <h1 class="aero-title">Contacto</h1>
-        <div class="aero-content-box">
-            <p>¿Interesado en colaborar en algún proyecto de software o tienes alguna pregunta técnica? Puedes contactarme a través de:</p>
-            <ul class="contact-list">
-                <li><strong>Email:</strong> enzo.dev@example.com</li>
-                <li><strong>GitHub:</strong> github.com/enzodev</li>
-                <li><strong>LinkedIn:</strong> linkedin.com/in/enzo-developer</li>
-            </ul>
+        <div class="aero-content-box" style="margin-bottom: 30px;">
+            <p style="font-size: 1.1rem; color: #003366; margin-bottom: 20px;">¿Interesado en colaborar en algún proyecto de software o tienes alguna pregunta técnica? Puedes contactarme a través de:</p>
+            
+            <div class="contact-links-grid">
+                <a href="mailto:enzo.dev@example.com" class="contact-aero-card">
+                    <span class="contact-icon">📧</span>
+                    <div class="contact-text">
+                        <strong>Email</strong>
+                        <span>enzo.dev@example.com</span>
+                    </div>
+                </a>
+                
+                <a href="https://github.com/enzodev" target="_blank" class="contact-aero-card">
+                    <span class="contact-icon">💻</span>
+                    <div class="contact-text">
+                        <strong>GitHub</strong>
+                        <span>github.com/enzodev</span>
+                    </div>
+                </a>
+                
+                <a href="https://linkedin.com/in/enzo-developer" target="_blank" class="contact-aero-card">
+                    <span class="contact-icon">💼</span>
+                    <div class="contact-text">
+                        <strong>LinkedIn</strong>
+                        <span>linkedin.com/in/enzo-developer</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <h1 class="aero-title" style="margin-top: 40px; font-size: 1.8rem;">Mis Certificados</h1>
+        <div id="certificados-container" class="certificados-grid">
+            <!-- Los certificados se inyectarán aquí dinámicamente mediante JS -->
         </div>
     `
 };
+
+// =========================================
+// SISTEMA DINÁMICO DE CERTIFICADOS
+// =========================================
+
+// Cuando agregues un pdf o imagen a la carpeta assets/img/certificados,
+// simplemente escribe su nombre exacto aquí abajo:
+const misCertificados = [
+    'egg.pdf' // <-- Tu primer certificado
+];
+
+function generarHTMLCertificados() {
+    let html = '';
+    
+    if (misCertificados.length === 0) {
+        return '<p style="color: #666; font-style: italic; width: 100%; text-align: center;">Aún no hay certificados disponibles.</p>';
+    }
+
+    misCertificados.forEach(archivo => {
+        // Determinar si es PDF o Imagen por la extensión
+        const ext = archivo.split('.').pop().toLowerCase();
+        const esPdf = ext === 'pdf';
+        
+        // Icono dependiendo del tipo de archivo
+        const iconoHTML = esPdf 
+            ? '<div class="cert-pdf-icon">📄</div>' 
+            : `<div class="cert-img-preview" style="background-image: url('assets/img/certificados/${archivo}')"></div>`;
+            
+        // El nombre visible sin la extensión (opcional)
+        let nombreLegible = archivo.replace(/\.[^/.]+$/, "").replace(/_/g, " ").toUpperCase();
+
+        html += `
+            <a href="assets/img/certificados/${archivo}" target="_blank" class="certificado-card">
+                <div class="certificado-glare"></div>
+                ${iconoHTML}
+                <div class="certificado-info">
+                    <span class="certificado-name">${nombreLegible}</span>
+                    <span class="certificado-type">Ver ${esPdf ? 'PDF' : 'Imagen'}</span>
+                </div>
+            </a>
+        `;
+    });
+    
+    return html;
+}
 
 // Lógica para cambiar dinámicamente el contenido
 function loadContent(target) {
@@ -176,9 +247,15 @@ function loadContent(target) {
         // Reset scroll position on content load
         screenContent.scrollTop = 0;
 
-        // Si cargamos la pantalla de proyectos, reinicializar botones de detalles (Modal)
+        // Tareas específicas según la pestaña cargada
         if (target === 'projects') {
             updateModalListeners();
+        } else if (target === 'contact') {
+            // Renderizamos los certificados dinámicamente si entramos a contacto
+            const certContainer = document.getElementById('certificados-container');
+            if (certContainer) {
+                certContainer.innerHTML = generarHTMLCertificados();
+            }
         }
     }, 200);
 }
