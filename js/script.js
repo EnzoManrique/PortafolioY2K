@@ -208,25 +208,25 @@ async function renderPDFThumbnail(pdfUrl, canvasId) {
         // En un entorno de archivos locales sin servidor web (file://), las peticiones 
         // fetch (usadas por pdf.js internamente) suelen fallar por políticas Strict CORS.
         // Hacemos un workaround pasando los disableStream y disableAutoFetch a true para archivos pequeños.
-        const loadingTask = pdfjsLib.getDocument({ 
+        const loadingTask = pdfjsLib.getDocument({
             url: pdfUrl,
             cMapUrl: 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/cmaps/',
             cMapPacked: true,
             disableStream: true,
             disableAutoFetch: true
         });
-        
+
         const pdf = await loadingTask.promise;
         const page = await pdf.getPage(1);
-        
+
         const canvas = document.getElementById(canvasId);
-        if(!canvas) return; // Si el canvas no existe en el DOM
-        
+        if (!canvas) return; // Si el canvas no existe en el DOM
+
         const ctx = canvas.getContext('2d');
-        
+
         // Ajustamos la escala para una buena resolución de miniatura
         const viewport = page.getViewport({ scale: 1.0 });
-        
+
         // Mantener las proporciones dentro del aspect ratio requerido 
         // (Aproximadamente 120px de altura max para CSS preview, antes era 200 pero CSS dicta 120px)
         const scale = 120 / viewport.height;
@@ -239,19 +239,19 @@ async function renderPDFThumbnail(pdfUrl, canvasId) {
             canvasContext: ctx,
             viewport: scaledViewport
         };
-        
+
         await page.render(renderContext).promise;
-        
+
         // Ocultar el loader y mostrar canvas
         canvas.classList.remove('hidden-canvas');
         const loader = document.getElementById(`loader-${canvasId}`);
-        if(loader) loader.style.display = 'none';
+        if (loader) loader.style.display = 'none';
 
     } catch (reason) {
         console.error('Error renderizando PDF miniatura: ', reason);
         // Fallback a ícono de documento si falla
         const loader = document.getElementById(`loader-${canvasId}`);
-        if(loader) loader.innerHTML = '📄';
+        if (loader) loader.innerHTML = '📄';
     }
 }
 
@@ -267,11 +267,11 @@ function generarHTMLCertificados() {
         // Determinar si es PDF o Imagen por la extensión
         const ext = archivo.split('.').pop().toLowerCase();
         const esPdf = ext === 'pdf';
-        
+
         const urlArchivo = `assets/img/certificados/${archivo}`;
         let iconoHTML = '';
 
-        if(esPdf) {
+        if (esPdf) {
             const canvasId = `pdf-canvas-${index}`;
             iconoHTML = `
                 <div class="cert-pdf-preview-container">
@@ -298,7 +298,7 @@ function generarHTMLCertificados() {
             </a>
         `;
     });
-    
+
     // Devolvemos el HTML y la lista de PDFs a renderizar
     return { html, pdfsToRender };
 }
@@ -328,9 +328,9 @@ function loadContent(target) {
                 const data = generarHTMLCertificados();
                 // 1. Inyectamos el DOM con los Canvas vacíos
                 certContainer.innerHTML = data.html;
-                
+
                 // 2. Ejecutamos asíncronamente PDF.js sobre cada canvas ya montado
-                if(data.pdfsToRender && data.pdfsToRender.length > 0) {
+                if (data.pdfsToRender && data.pdfsToRender.length > 0) {
                     data.pdfsToRender.forEach(pdfInfo => {
                         renderPDFThumbnail(pdfInfo.url, pdfInfo.id);
                     });
@@ -388,8 +388,8 @@ const projectsDb = {
         -Procedimientos guardados que optimizan el cálculo de ganancias netas y facturación por rangos de fechas en una sola consulta<br><br>`,
         techStack: 'PHP nativo, MySQL, HTML5, CSS3, JavaScript (Vanilla).',
         role: 'Desarrollador Full Stack Jr.',
-        githubLink: '#',
-        docLink: '#',
+        githubLink: 'https://github.com/EnzoManrique/Gestor-Stock-Ventas',
+        docLink: 'https://github.com/EnzoManrique/Gestor-Stock-Ventas/blob/main/README.md',
         images: [
             'assets/img/proyectoUch/index.png',
             'assets/img/proyectoUch/inventario.png',
@@ -405,8 +405,8 @@ const projectsDb = {
         description: 'Aplicación nativa para Android diseñada para la logística, seguimiento, mantenimiento y control de unidades de transporte pesado (trailers). Pensada para uso offline con sincronización local de bases de datos.',
         techStack: 'Kotlin, Jetpack Compose, UI Material 3, Room Database, Coroutines.',
         role: 'Desarrollador Android Mobile',
-        githubLink: '#',
-        docLink: '#',
+        githubLink: 'https://github.com/EnzoManrique/TrailerApp',
+        docLink: 'https://github.com/EnzoManrique/TrailerApp/blob/main/README.md',
         images: []
     }
 };
