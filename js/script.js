@@ -423,6 +423,11 @@ function initProyectosModal() {
     const modalTechStack = document.querySelector('.modal-specs-box p:nth-child(1)');
     const modalRole = document.querySelector('.modal-specs-box p:nth-child(2)');
     const modalGalleryGrid = document.querySelector('.modal-gallery-grid');
+    
+    // Referencias a los enlaces de Recursos
+    const resourcesLinks = document.querySelectorAll('.modal-links-container .glossy-link-btn');
+    const btnGithub = resourcesLinks[0];
+    const btnDocs = resourcesLinks[1];
 
     // Función para añadir los event listeners iterando los items cada vez que se carga la pestaña
     function attachItemListeners() {
@@ -439,6 +444,16 @@ function initProyectosModal() {
                     modalDescText.innerHTML = pData.description;
                     modalTechStack.innerHTML = `<strong>Pila Tecnológica:</strong> ${pData.techStack}`;
                     modalRole.innerHTML = `<strong>Rol:</strong> ${pData.role}`;
+                    
+                    // Actualizar Enlaces de Recursos
+                    if(btnGithub) {
+                        btnGithub.href = pData.githubLink || '#';
+                        btnGithub.target = (pData.githubLink && pData.githubLink !== '#') ? '_blank' : '_self';
+                    }
+                    if(btnDocs) {
+                        btnDocs.href = pData.docLink || '#';
+                        btnDocs.target = (pData.docLink && pData.docLink !== '#') ? '_blank' : '_self';
+                    }
 
                     // Actualizar Galería
                     if (pData.images && pData.images.length > 0) {
