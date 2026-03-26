@@ -71,13 +71,20 @@ const projectsDb = {
 
         El núcleo de persistencia utiliza Room Database estructurado relacionalmente para cruzar clientes, productos y pedidos al instante. La lógica no solo reside en la vista, sino que se apoya en operaciones locales profundas:<br><br>
 
-        Consultas transaccionales en los DAOs que actualizan dinámicamente el precio total del carro virtual según cambien los ítems.<br><br>
-        Visualizaciones analíticas que compilan históricos de venta mediante gráficas de Vico Charts sin requerir tiempos de carga web molestos.<br><br>
-        Archivado nativo usando librerías (iTextG, Apache POI) para escribir reportes binarios directo al almacenamiento del teléfono para dar absoluta autonomía comercial.<br><br>`,
+        -Consultas transaccionales en los DAOs que actualizan dinámicamente el precio total del carro virtual según cambien los ítems.<br><br>
+        -Visualizaciones analíticas que compilan históricos de venta mediante gráficas de Vico Charts sin requerir tiempos de carga web molestos.<br><br>
+        -Archivado nativo usando librerías (iTextG, Apache POI) para escribir reportes binarios directo al almacenamiento del teléfono para dar absoluta autonomía comercial.<br><br>`,
         techStack: 'Kotlin Nativo, Jetpack Compose, Arch Components (Room, ViewModel, DataStore, WorkManager), iTextG SDK, Google Drive API.',
         role: 'Desarrollador Mobile Android Jr.',
         githubLink: 'https://github.com/EnzoManrique/TrailerApp',
         docLink: 'https://github.com/EnzoManrique/TrailerApp/blob/main/README.md',
-        images: []
+        images: ['assets/img/proyectoTTM/home.png',
+            'assets/img/proyectoTTM/home2.png',
+            'assets/img/proyectoTTM/inventario.png',
+            'assets/img/proyectoTTM/venta.png',
+            'assets/img/proyectoTTM/generarVenta.png',
+            'assets/img/proyectoTTM/promocion.png',
+            'assets/img/proyectoTTM/edicionPromocion.png',
+        ]
     }
 };
