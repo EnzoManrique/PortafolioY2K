@@ -1,0 +1,35 @@
+/* =========================================
+   VARIABLES GLOBALES FRUTIGER AERO
+   ========================================= */
+:root {
+    --bg-top: #34aadc;
+    /* Cielo azul vibrante */
+    --bg-bottom: #bdf2ff;
+    /* Cian muy claro / Agua brillante */
+
+    --text-dark: #003366;
+    --text-accent: #006bb3;
+
+    /* Variables de botones Glossy */
+    --btn-color-top: #66ccff;
+    --btn-color-mid: #0099ff;
+    --btn-color-bottom: #0077cc;
+    --btn-border: #005599;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body,
+html {
+    width: 100%;
+    height: 100%;
+    /* Tipografía clara, sin serifa y amigable, clásica de la época */
+    font-family: 'Verdana', 'Arial', 'Segoe UI', sans-serif;
+    color: var(--text-dark);
+    overflow: hidden;
+    /* Evita scrolls de toda la página para efecto inmersivo */
+}

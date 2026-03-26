@@ -1,0 +1,361 @@
+/* =========================================
+   MODAL FLOTANTE (DETALLES DEL PROYECTO)
+   ========================================= */
+
+/* Capa de fondo que cubre toda la pantalla */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 30, 60, 0.4);
+    /* Oscurecimiento sutil azulado */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+/* Clase para ocultar el modal */
+.modal-overlay.hidden {
+    display: none;
+    opacity: 0;
+}
+
+/* La ventana principal del Modal */
+.aero-modal-window {
+    width: 90%;
+    max-width: 800px;
+    max-height: 85vh;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(240, 248, 255, 0.6) 100%);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow:
+        0 15px 40px rgba(0, 50, 100, 0.4),
+        inset 0 0 20px rgba(255, 255, 255, 0.8),
+        inset 0 2px 2px rgba(255, 255, 255, 1);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: modalPopUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalPopUp {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* 1. Barra de Título (Window Header) */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 15px;
+    background: linear-gradient(to bottom, rgba(240, 248, 255, 0.9) 0%, rgba(135, 206, 250, 0.4) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.modal-title {
+    font-weight: bold;
+    font-size: 0.95rem;
+    color: #003366;
+    text-shadow: 1px 1px 3px rgba(255, 255, 255, 1);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Botón de cerrar rojo Glossy */
+.modal-close-btn {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 25%, #ffb6c1 0%, #ff5c5c 40%, #cc0000 100%);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    color: white;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    font-size: 0.85rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow:
+        inset 0 2px 4px rgba(255, 255, 255, 0.8),
+        0 2px 4px rgba(0, 0, 0, 0.2);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    transition: all 0.2s;
+}
+
+.modal-close-btn:hover {
+    filter: brightness(1.2);
+    transform: scale(1.05);
+}
+
+.modal-close-btn:active {
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.4);
+    transform: scale(0.95);
+}
+
+/* Contenido Interno del Modal */
+.modal-content-area {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+/* 2. Encabezado del Proyecto (Icono y Título) */
+.modal-project-header {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed rgba(135, 206, 250, 0.6);
+}
+
+.modal-project-icon {
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+    /* Efecto "base de cristal" para que el ícono (aunque vacío) resalte */
+    background: linear-gradient(135deg, rgba(230, 247, 255, 0.8) 0%, rgba(179, 224, 255, 0.5) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    box-shadow:
+        inset 0 0 15px rgba(255, 255, 255, 1),
+        0 5px 15px rgba(0, 100, 200, 0.15);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.modal-project-icon img {
+    width: 80%;
+    height: 80%;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+.modal-project-title-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modal-main-title {
+    margin: 0;
+    color: #004488;
+    font-size: 2rem;
+    font-weight: normal;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* El área scrolleable de debajo de la cabecera */
+.modal-scroll-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 15px;
+    /* Espacio para el scrollbar aero */
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* Reutilizamos el scrollbar de la clase general (ya definido previamente) */
+.modal-scroll-content::-webkit-scrollbar {
+    width: 14px;
+}
+
+.modal-scroll-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 7px;
+    margin: 4px;
+    border: 1px solid rgba(135, 206, 250, 0.3);
+}
+
+.modal-scroll-content::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, rgba(225, 244, 255, 0.9) 0%, rgba(179, 224, 255, 0.8) 100%);
+    border-radius: 7px;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: inset 0 2px 5px rgba(255, 255, 255, 1), 0 2px 4px rgba(0, 100, 200, 0.1);
+}
+
+/* Estilos de subtítulos de seccion */
+.modal-section-title {
+    font-size: 1.15rem;
+    color: #006bb3;
+    margin: 0 0 15px 0;
+    font-weight: bold;
+}
+
+/* 3. Galería de Capturas */
+.modal-gallery-grid {
+    display: flex;
+    gap: 15px;
+}
+
+.gallery-main-img {
+    flex: 2;
+    height: 200px;
+    border-radius: 8px;
+}
+
+.gallery-side-imgs {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.gallery-thumb {
+    flex: 1;
+    height: calc((200px - 15px) / 2);
+    border-radius: 6px;
+}
+
+/* Estilo placeholder Cristal brillante de la galería */
+.placeholder-glare {
+    background: linear-gradient(135deg, #e6f7ff 0%, #cceeff 100%);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow:
+        inset 0 0 10px rgba(0, 50, 150, 0.1),
+        0 2px 5px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Brillo en diagonal dinámico de las placeholders */
+.placeholder-glare::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%);
+    transform: skewX(-25deg);
+    animation: shineLight 4s infinite;
+}
+
+@keyframes shineLight {
+    0% {
+        left: -100%;
+    }
+
+    20% {
+        left: 200%;
+    }
+
+    100% {
+        left: 200%;
+    }
+
+    /* Pausa entre destellos */
+}
+
+/* 4. Descripción y Especificaciones */
+.modal-desc-text {
+    line-height: 1.6;
+    color: #333;
+    font-size: 1.05em;
+    margin-bottom: 25px;
+}
+
+/* Caja de especificaciones (Fuerza Segoe UI) */
+.modal-specs-box {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(135, 206, 250, 0.5);
+    border-radius: 8px;
+    padding: 15px 20px;
+    font-family: 'Segoe UI', sans-serif !important;
+    /* CRUCIAL: Segoe UI para esta sección */
+    color: #111;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.02);
+}
+
+.modal-specs-box p {
+    margin-bottom: 8px;
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+.modal-specs-box p:last-child {
+    margin-bottom: 0;
+}
+
+.modal-specs-box strong {
+    color: #004488;
+}
+
+/* 5. Recursos & Botones Glossy */
+.modal-links-container {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.glossy-link-btn {
+    text-decoration: none;
+    color: #004488;
+    font-weight: bold;
+    font-size: 0.95rem;
+    padding: 12px 20px;
+    border-radius: 25px;
+    /* Fondo estilo gelatina semi-transparente */
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0.9) 0%,
+            rgba(225, 244, 255, 0.7) 49%,
+            rgba(179, 224, 255, 0.8) 50%,
+            rgba(204, 235, 255, 0.9) 100%);
+    border: 1px solid rgba(135, 206, 250, 0.8);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    /* El truco del efecto Aero/Glass Button */
+    box-shadow:
+        0 4px 6px rgba(0, 100, 200, 0.15),
+        inset 0 2px 3px rgba(255, 255, 255, 1),
+        inset 0 -5px 10px rgba(255, 255, 255, 0.4);
+    transition: all 0.2s;
+}
+
+.glossy-link-btn:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 1) 0%,
+            rgba(240, 250, 255, 0.8) 49%,
+            rgba(204, 235, 255, 0.9) 50%,
+            rgba(225, 244, 255, 1) 100%);
+    box-shadow:
+        0 6px 10px rgba(0, 100, 200, 0.2),
+        inset 0 2px 3px rgba(255, 255, 255, 1),
+        inset 0 -5px 10px rgba(255, 255, 255, 0.5);
+    border-color: #87CEFA;
+}
+
+.glossy-link-btn:active {
+    transform: translateY(1px);
+    box-shadow:
+        0 1px 2px rgba(0, 100, 200, 0.1),
+        inset 0 3px 5px rgba(0, 0, 0, 0.05);
+}

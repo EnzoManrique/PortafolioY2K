@@ -1,0 +1,179 @@
+/* =========================================
+   EXPLORADOR DE ARCHIVOS VISTA/7 (PROYECTOS)
+   ========================================= */
+.explorer-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.6);
+    /* Fondo blanco base del explorador */
+    border: 1px solid rgba(135, 206, 250, 0.8);
+    border-radius: 6px;
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.8), 0 2px 5px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+/* 1. Barra de Navegación Superior */
+.explorer-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: linear-gradient(to bottom, #f0f8ff 0%, #e6f2ff 100%);
+    border-bottom: 1px solid rgba(135, 206, 250, 0.7);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.explorer-address-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: white;
+    border: 1px solid #cce6ff;
+    padding: 4px 10px;
+    border-radius: 4px;
+    flex-grow: 1;
+    margin-right: 15px;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-size: 0.9rem;
+    color: #333;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.explorer-folder-icon {
+    font-size: 1.1rem;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+}
+
+.explorer-view-controls {
+    display: flex;
+    gap: 5px;
+}
+
+.explorer-btn {
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #005599;
+    transition: all 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.explorer-btn:hover,
+.explorer-btn.active {
+    background: linear-gradient(to bottom, rgba(225, 244, 255, 0.8) 0%, rgba(180, 225, 255, 0.6) 100%);
+    border: 1px solid #7accff;
+    box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.8), 0 1px 2px rgba(0, 100, 200, 0.1);
+}
+
+/* Área de contenido principal del explorador (Scroll) */
+.explorer-content-area {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    /* Scroll fluido nativo */
+    scroll-behavior: smooth;
+}
+
+/* Scrollbar para el explorador */
+.explorer-content-area::-webkit-scrollbar {
+    width: 14px;
+}
+
+.explorer-content-area::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 7px;
+    margin: 4px;
+    border: 1px solid rgba(135, 206, 250, 0.3);
+}
+
+.explorer-content-area::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, rgba(225, 244, 255, 0.9) 0%, rgba(179, 224, 255, 0.8) 100%);
+    border-radius: 7px;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: inset 0 2px 5px rgba(255, 255, 255, 1), 0 2px 4px rgba(0, 100, 200, 0.1);
+}
+
+.explorer-content-area::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, rgba(240, 250, 255, 1) 0%, rgba(122, 204, 255, 0.9) 100%);
+}
+
+/* 2. Cuadrícula de Archivos (Grid) */
+.explorer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+/* 3. Item Invididual (Archivo/Proyecto) */
+.explorer-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 8px;
+    border: 1px solid transparent;
+    /* Transparente por defecto */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Efecto Hover Crítico (Aero Glossy azul turquesa) */
+.explorer-item:hover {
+    background: rgba(0, 150, 255, 0.1);
+    /* Celeste muy transparente */
+    border: 1px solid #00aaff;
+    /* Borde cyan brillante */
+    box-shadow:
+        inset 0 0 10px rgba(255, 255, 255, 0.5),
+        /* Brillo interior */
+        0 2px 6px rgba(0, 170, 255, 0.2);
+    /* Sombra cyan exterior suave */
+}
+
+/* Estructura del ícono */
+.explorer-icon-box {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 10px;
+    position: relative;
+    /* Efectos hover sutiles para el ícono */
+    transition: transform 0.2s;
+}
+
+.explorer-item:hover .explorer-icon-box {
+    transform: translateY(-2px);
+}
+
+/* 4. Placeholder de Ícono Provisional */
+.explorer-placeholder-icon {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow:
+        0 4px 6px rgba(0, 0, 0, 0.1),
+        inset 0 3px 5px rgba(255, 255, 255, 0.8),
+        inset 0 -2px 5px rgba(0, 0, 0, 0.2);
+    display: block;
+}
+
+.explorer-item-details {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.explorer-item-name {
+    font-size: 0.95rem;
+    color: #111;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    /* Cortar texto con puntos suspensivos si es muy largo */
+    word-break: break-word;
+}

@@ -1,0 +1,313 @@
+/* =========================================
+   CAPA 1: FONDO ACUÁTICO Y BURBUJAS
+   ========================================= */
+.water-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Gradiente suave celeste a cyan */
+    background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
+    z-index: 1;
+}
+
+/* Agregamos una suave luz en la parte inferior para dar profundidad al agua */
+.water-background::after {
+    content: '';
+    position: absolute;
+    bottom: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150%;
+    height: 50%;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 70%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+#bubble-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: relative;
+    z-index: 3;
+}
+
+/* =========================================
+   CAPA 2: VENTANA DEL REPRODUCTOR (Media Player)
+   ========================================= */
+.media-player-window {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 92%;
+    max-width: 1200px;
+    height: 80%;
+    min-height: 550px;
+    z-index: 10;
+
+    /* El efecto 'Glassmorphism / Aero Glass' */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.2) 100%);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    /* Bordes gruesos y brillantes tipo ventana Aero */
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+
+    /* Sombras tridimensionales exteriores y reflejo interior */
+    box-shadow:
+        0 15px 35px rgba(0, 100, 200, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.4),
+        /* borde externo subpixel */
+        inset 0 0 20px rgba(255, 255, 255, 0.8),
+        /* resplandor interno */
+        inset 0 2px 2px rgba(255, 255, 255, 1);
+    /* luz superior fuerte */
+
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: windowRise 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes windowRise {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -45%) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* ---------------------------------
+   Header de SO de los 2000
+   --------------------------------- */
+.window-header {
+    height: 38px;
+    /* Barra de título con degradado y reflejo glossy superior */
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0.9) 0%,
+            rgba(255, 255, 255, 0.4) 40%,
+            rgba(255, 255, 255, 0.2) 41%,
+            rgba(255, 255, 255, 0.1) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 12px;
+}
+
+.window-title {
+    font-weight: bold;
+    font-size: 0.85rem;
+    color: var(--text-dark);
+    text-shadow: 1px 1px 3px rgba(255, 255, 255, 1);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.music-icon {
+    font-size: 1.1rem;
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2));
+}
+
+.window-controls {
+    display: flex;
+    gap: 6px;
+}
+
+/* Botoncitos estilo Mac/Aero de la barra superior */
+.win-btn {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.9), 0 1px 2px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: filter 0.2s;
+}
+
+.win-btn:hover {
+    filter: brightness(1.2);
+}
+
+.win-btn:active {
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Colores glossy de los tres botones */
+.win-btn.close {
+    background: radial-gradient(circle at 35% 25%, #ffb6c1 0%, #ff5c5c 40%, #cc0000 100%);
+}
+
+.win-btn.maximize {
+    background: radial-gradient(circle at 35% 25%, #b3ffb3 0%, #33cc33 40%, #009900 100%);
+}
+
+.win-btn.minimize {
+    background: radial-gradient(circle at 35% 25%, #e6f7ff 0%, #99ccff 40%, #3388cc 100%);
+}
+
+/* ---------------------------------
+   Área de la 'Pantalla' Central
+   --------------------------------- */
+.screen-area {
+    flex-grow: 1;
+    margin: 15px 20px 20px 20px;
+    /* Fondo azul claro / blanco clínico, limpio */
+    background: linear-gradient(160deg, #f0f8ff 0%, #e1f4ff 100%);
+    border-radius: 8px;
+    /* Borde interno azulado con sombra interior para dar profundidad hundida */
+    border: 2px solid #a3dcff;
+    box-shadow:
+        inset 0 5px 15px rgba(0, 50, 100, 0.1),
+        0 2px 5px rgba(255, 255, 255, 0.8);
+    position: relative;
+    overflow: hidden;
+    /* Cortamos para el glare y el scroll lo ponemos en el content */
+}
+
+/* Reflejo de cristal sobre la pantalla completa en diagonal */
+.screen-glare {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 40%);
+    pointer-events: none;
+    z-index: 2;
+    transform: rotate(10deg);
+}
+
+#screen-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 25px 35px;
+    overflow-y: auto;
+    z-index: 5;
+    /* Scroll fluido nativo */
+    scroll-behavior: smooth;
+}
+
+/* Scrollbar estilo aero-gelatina */
+#screen-content::-webkit-scrollbar {
+    width: 14px;
+}
+
+#screen-content::-webkit-scrollbar-track {
+    background: rgba(135, 206, 250, 0.1);
+    border-radius: 7px;
+    margin: 4px;
+}
+
+#screen-content::-webkit-scrollbar-thumb {
+    background: linear-gradient(to right, #b3e0ff, #7accff);
+    border-radius: 7px;
+    border: 2px solid #e1f4ff;
+}
+
+#screen-content::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to right, #80ccff, #33adff);
+}
+
+/* ---------------------------------
+   Barra Inferior de Controles (Glossy UI)
+   --------------------------------- */
+.glass-nav-bar {
+    height: 75px;
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0.6) 0%,
+            rgba(135, 206, 250, 0.4) 50%,
+            rgba(85, 175, 230, 0.3) 100%);
+    border-top: 1px solid rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    padding: 0 20px;
+    box-shadow: inset 0 10px 15px rgba(255, 255, 255, 0.4);
+    z-index: 10;
+}
+
+/* Estilo exacto de botón gelatina/Aero */
+.glossy-btn {
+    /* Degradado "hard stop" característico del glossy design a la mitad */
+    background: linear-gradient(to bottom,
+            var(--btn-color-top) 0%,
+            var(--btn-color-mid) 49%,
+            var(--btn-color-bottom) 50%,
+            var(--btn-color-mid) 100%);
+    border: 1px solid var(--btn-border);
+    border-radius: 30px;
+    padding: 10px 25px;
+    color: white;
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+
+    /* Múltiples luces para imitar el plástico transparente curvado */
+    box-shadow:
+        0 4px 6px rgba(0, 50, 150, 0.3),
+        /* sombra proyectada */
+        inset 0 1px 3px rgba(255, 255, 255, 0.9),
+        /* Resplandor de luz arriba */
+        inset 0 -15px 15px rgba(255, 255, 255, 0.2);
+    /* Reflejo luz abajo */
+
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 140px;
+}
+
+.glossy-btn:hover {
+    filter: brightness(1.15) saturate(1.2);
+    transform: translateY(-2px);
+    box-shadow:
+        0 6px 12px rgba(0, 100, 200, 0.4),
+        inset 0 1px 3px rgba(255, 255, 255, 1),
+        inset 0 -15px 15px rgba(255, 255, 255, 0.3);
+}
+
+.glossy-btn:active {
+    transform: translateY(2px);
+    box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.3),
+        inset 0 5px 10px rgba(0, 0, 0, 0.3),
+        inset 0 1px 1px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(to bottom,
+            var(--btn-color-bottom) 0%,
+            var(--btn-color-mid) 100%);
+}
+
+.glossy-btn.active {
+    /* Diferenciar el botón presionado */
+    background: linear-gradient(to bottom,
+            #33adff 0%,
+            #0088cc 49%,
+            #006699 50%,
+            #0088cc 100%);
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.2),
+        inset 0 0 10px rgba(255, 255, 255, 0.5),
+        inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.icon {
+    font-size: 1.1rem;
+}

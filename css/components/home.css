@@ -1,0 +1,218 @@
+/* =========================================
+   ESTILOS MSN MESSENGER (HOME)
+   ========================================= */
+.msn-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%;
+    /* Tipografías clásicas de MSN */
+    font-family: 'Tahoma', 'Trebuchet MS', sans-serif;
+    color: #111;
+}
+
+/* 1. Encabezado de Perfil */
+.msn-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9) 0%, rgba(220, 240, 255, 0.5) 100%);
+    border: 1px solid rgba(135, 206, 250, 0.6);
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: inset 0 2px 5px rgba(255, 255, 255, 1), 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.msn-avatar-container {
+    position: relative;
+    width: 85px;
+    height: 85px;
+    flex-shrink: 0;
+}
+
+.msn-avatar {
+    width: 100%;
+    height: 100%;
+    background-color: #e6f2ff;
+    /* Color de fondo mientras no hay imagen */
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    /* Cuadrado con bordes suaves, clásico pero redondeado */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15), inset 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.msn-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Iconito verde brillante */
+.msn-status-dot {
+    position: absolute;
+    bottom: -4px;
+    right: -4px;
+    width: 22px;
+    height: 22px;
+    background: radial-gradient(circle at 35% 25%, #66ff66 0%, #00cc00 60%, #006600 100%);
+    border: 2px solid white;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.msn-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.msn-nickname {
+    margin: 0 0 6px 0;
+    color: #003366;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.msn-status-text {
+    font-size: 0.9rem;
+    color: #0066cc;
+    font-weight: normal;
+}
+
+.msn-personal-msg {
+    margin: 0 0 8px 0;
+    font-size: 0.95rem;
+    color: #444;
+    font-style: italic;
+    font-family: 'Verdana', sans-serif;
+}
+
+.msn-listening-msg {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #006699;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* 2. Ventana de Historial de Chat */
+.msn-chat-window {
+    flex-grow: 1;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(240, 248, 255, 0.7) 100%);
+    border: 1px solid rgba(135, 206, 250, 0.8);
+    border-radius: 10px;
+    padding: 20px 20px 5px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+    /* Oculta cualquier cosa fuera para que el scroll mande */
+    max-height: 380px;
+    /* Limita el alto asegurando que se habilite el scroll */
+}
+
+.msn-chat-scroll {
+    overflow-y: auto;
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    height: 100%;
+}
+
+/* Usamos el scrollbar aero personalizado para MSN chat */
+.msn-chat-scroll::-webkit-scrollbar {
+    width: 14px;
+}
+
+.msn-chat-scroll::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 7px;
+    margin: 4px;
+    border: 1px solid rgba(135, 206, 250, 0.3);
+}
+
+.msn-chat-scroll::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, rgba(225, 244, 255, 0.9) 0%, rgba(179, 224, 255, 0.8) 100%);
+    border-radius: 7px;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    box-shadow: inset 0 2px 5px rgba(255, 255, 255, 1), 0 2px 4px rgba(0, 100, 200, 0.1);
+}
+
+.msn-chat-scroll::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, rgba(240, 250, 255, 1) 0%, rgba(122, 204, 255, 0.9) 100%);
+}
+
+.msn-chat-nudge {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #444;
+    font-weight: bold;
+    margin-bottom: 5px;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 15px;
+    width: fit-content;
+    margin: 0 auto;
+    /* Animación del zumbido que se ejecutará al cargar el script en teoría */
+    animation: nudge 0.6s cubic-bezier(.36, .07, .19, .97) both;
+}
+
+@keyframes nudge {
+
+    10%,
+    90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    20%,
+    80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%,
+    60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}
+
+.msn-msg-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    margin-bottom: 5px;
+}
+
+.msn-sender {
+    font-size: 0.9rem;
+    color: #4682b4;
+    /* Azul acero de MSN */
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.msn-bubble {
+    /* Celeste claro glossy */
+    background: linear-gradient(to bottom, #e1f4ff 0%, #ccebff 100%);
+    border: 1px solid #99d6ff;
+    padding: 12px 18px;
+    border-radius: 15px;
+    border-top-left-radius: 2px;
+    /* La clásiga esquina apuntando al usuario */
+    font-size: 1.05rem;
+    color: #003366;
+    line-height: 1.5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+    max-width: 90%;
+}

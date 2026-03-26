@@ -1,0 +1,135 @@
+/* =========================================
+   ESTILOS DE CONTENIDO COMPARTIDOS
+   ========================================= */
+.aero-title {
+    color: var(--text-accent);
+    margin-top: 0;
+    font-size: 2.2rem;
+    font-weight: normal;
+    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid rgba(135, 206, 250, 0.6);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.aero-content-box {
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow:
+        inset 0 0 20px rgba(255, 255, 255, 1),
+        0 4px 10px rgba(0, 50, 150, 0.03);
+}
+
+.aero-content-box p {
+    line-height: 1.6;
+    margin-bottom: 18px;
+    font-size: 1.05rem;
+}
+
+/* Tarjetas de Proyectos en 3D Suave */
+.project-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(240, 248, 255, 0.7) 100%);
+    border: 1px solid rgba(255, 255, 255, 1);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow:
+        0 5px 15px rgba(0, 100, 200, 0.06),
+        inset 0 0 15px rgba(255, 255, 255, 0.6);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+}
+
+.project-card:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow:
+        0 12px 25px rgba(0, 150, 255, 0.15),
+        inset 0 0 10px rgba(255, 255, 255, 1);
+    border-color: #87CEFA;
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    border-bottom: 1px dashed rgba(135, 206, 250, 0.5);
+    padding-bottom: 10px;
+}
+
+.project-header h2 {
+    color: #004488;
+    font-size: 1.3rem;
+    margin: 0;
+}
+
+.status-badge {
+    background: linear-gradient(to bottom, #d1fae5, #a7f3d0);
+    border: 1px solid #34d399;
+    color: #065f46;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.status-badge.active {
+    background: linear-gradient(to bottom, #e0f2fe, #bae6fd);
+    border: 1px solid #38bdf8;
+    color: #0369a1;
+}
+
+.project-card p {
+    line-height: 1.5;
+    margin-bottom: 15px;
+    color: #1e3a5f;
+}
+
+/* Etiquetas/Tags Glossy */
+.tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    background: linear-gradient(to bottom, #f8fafc, #e2e8f0);
+    border: 1px solid #cbd5e1;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #334155;
+    font-weight: bold;
+    box-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.05),
+        inset 0 1px 1px rgba(255, 255, 255, 1);
+}
+
+/* Lista de contacto */
+.contact-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+.contact-list li {
+    padding: 12px 0;
+    font-size: 1.1rem;
+    border-bottom: 1px dashed rgba(135, 206, 250, 0.6);
+    display: flex;
+    align-items: center;
+}
+
+.contact-list li::before {
+    content: '▶';
+    color: #0099ff;
+    font-size: 0.8rem;
+    margin-right: 10px;
+}
+
+.contact-list li strong {
+    color: #004488;
+    margin-right: 8px;
+}
