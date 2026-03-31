@@ -3,7 +3,7 @@
  * el comportamiento clásico de un rudimentario Sistema Operativo (Windows/Aero).
  */
 
-export function initWindowDrag() {
+function initWindowDrag() {
     const windowHeader = document.querySelector('.window-header');
     const mediaPlayerWindow = document.querySelector('.media-player-window');
 
