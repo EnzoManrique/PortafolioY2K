@@ -12,11 +12,14 @@
 
 .contact-aero-card {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 15px;
+    justify-content: center;
+    text-align: center;
+    gap: 8px;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(230, 245, 255, 0.5) 100%);
     border: 1px solid rgba(135, 206, 250, 0.6);
-    padding: 15px;
+    padding: 20px 15px;
     border-radius: 12px;
     text-decoration: none;
     color: #003366;
@@ -58,17 +61,20 @@
 .contact-text {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .contact-text strong {
     font-size: 1.1rem;
     color: #00509e;
+    margin-bottom: 4px;
 }
 
 .contact-text span {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #555;
     font-family: monospace;
+    word-break: break-word; /* Soluciona el desbordamiento horizontal */
 }
 
 /* =========================================

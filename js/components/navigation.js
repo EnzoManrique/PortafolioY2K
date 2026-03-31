@@ -25,15 +25,8 @@ function loadContent(target) {
             const certContainer = document.getElementById('certificados-container');
             if (certContainer) {
                 const data = generarHTMLCertificados();
-                // 1. Inyectamos el DOM con los Canvas vacíos
+                // Inyectamos el DOM renderizado de los certificados (contiene los iframe o divs)
                 certContainer.innerHTML = data.html;
-
-                // 2. Ejecutamos asíncronamente PDF.js sobre cada canvas ya montado
-                if (data.pdfsToRender && data.pdfsToRender.length > 0) {
-                    data.pdfsToRender.forEach(pdfInfo => {
-                        renderPDFThumbnail(pdfInfo.url, pdfInfo.id);
-                    });
-                }
             }
         }
     }, 200);

@@ -22,16 +22,16 @@
     width: 150%;
     height: 50%;
     background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 70%);
-    pointer-events: none;
-    z-index: 2;
 }
 
-#bubble-canvas {
+#webgl-container {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    display: block;
-    position: relative;
-    z-index: 3;
+    z-index: 2; 
+    pointer-events: none; 
 }
 
 /* =========================================
@@ -101,6 +101,11 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 12px;
+    
+    /* Configuración interactiva de Arrastre */
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .window-title {

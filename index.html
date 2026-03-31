@@ -5,8 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enzo | Frutiger Aero Portfolio</title>
-    <!-- Cargamos PDF.js para hacer thumbnailing dinámico de los certificados -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    
+    <!-- Mapa de Importaciones (Import Map) de Three.js -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
     
     <!-- Estilos modulares -->
     <link rel="stylesheet" href="css/base.css">
@@ -20,10 +28,9 @@
 </head>
 
 <body>
-    <!-- Capa de Fondo Acuático con Burbujas -->
-    <div class="water-background">
-        <canvas id="bubble-canvas"></canvas>
-    </div>
+    <!-- Capa de Fondo Acuático interactivo -->
+    <div class="water-background"></div>
+    <div id="webgl-container"></div>
 
     <!-- Contenedor Principal (Ventana de Reproductor) -->
     <div class="media-player-window">
@@ -160,14 +167,20 @@
         </div>
     </div>
 
-    <!-- Scripts modulares -->
+    <!-- Scripts modulares base de la UI -->
     <script src="js/data/content.js"></script>
     <script src="js/data/projects.js"></script>
     <script src="js/utils/pdf.js"></script>
-    <script src="js/components/bubbles.js"></script>
     <script src="js/components/navigation.js"></script>
     <script src="js/components/modals.js"></script>
+    <script src="js/components/windowDrag.js"></script>
+
+    <!-- Orquestador Principal UI -->
     <script src="js/main.js"></script>
+
+    <!-- Scripts de Three.js (ES Modules) -->
+    <script type="module" src="js/components/modelsLoader.js"></script>
+    <script type="module" src="js/components/scene3d.js"></script>
 </body>
 
 </html>

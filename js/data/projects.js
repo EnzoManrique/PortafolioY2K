@@ -2,10 +2,13 @@
 // SISTEMA DINÁMICO DE CERTIFICADOS
 // =========================================
 
-// Cuando agregues un pdf o imagen a la carpeta assets/img/certificados,
-// simplemente escribe su nombre exacto aquí abajo:
+// Cuando agregues un pdf y su captura de pantalla a la carpeta assets/img/certificados,
+// simplemente escribe sus nombres exactos aquí abajo:
 const misCertificados = [
-    'curso_fullstack.pdf' // <-- Tu primer certificado
+    {
+        pdf: 'curso_fullstack.pdf', // <-- Tu certificado real para descargar
+        img: 'curso_fullstack.png'  // <-- La captura de pantalla que tomaste (puede ser .png o .jpg)
+    }
 ];
 
 // Base de datos de proyectos simulada

@@ -2,8 +2,8 @@
 
 document.addEventListener("DOMContentLoaded", () => {
     // Inicializar los componentes gráficos base
-    initBubbles();
     initNavigation();
+    initWindowDrag();
 
     // Cargar la sección de inicio (home) por defecto con una ligera animación de entrada
     setTimeout(() => {
