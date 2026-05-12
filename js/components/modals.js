@@ -102,58 +102,81 @@ function initProyectosModal() {
                 const pData = projectsDb[projectId];
 
                 if (pData) {
-                    // Update DOM
-                    modalWindowTitle.innerHTML = `<span class="icon">📄</span> ${pData.windowTitle}`;
-                    modalMainTitle.textContent = pData.mainTitle;
-                    modalDescText.innerHTML = pData.description;
-                    modalTechStack.innerHTML = `<strong>Pila Tecnológica:</strong> ${pData.techStack}`;
-                    modalRole.innerHTML = `<strong>Rol:</strong> ${pData.role}`;
-                    
-                    // Actualizar Enlaces de Recursos
-                    if(btnGithub) {
-                        btnGithub.href = pData.githubLink || '#';
-                        btnGithub.target = (pData.githubLink && pData.githubLink !== '#') ? '_blank' : '_self';
-                    }
-                    if(btnDocs) {
-                        btnDocs.href = pData.docLink || '#';
-                        btnDocs.target = (pData.docLink && pData.docLink !== '#') ? '_blank' : '_self';
-                    }
+                    const gallerySection = document.querySelector('.modal-gallery-section');
+                    const specsBox = document.querySelector('.modal-specs-box');
+                    const specsTitle = document.querySelector('.modal-desc-section .modal-section-title');
+                    const resourcesSection = document.querySelector('.modal-resources-section');
 
-                    // Actualizar Galería
-                    if (pData.images && pData.images.length > 0) {
-                        // Pasamos el array de imagenes en json a las miniaturas a través de atributos de datos
-                        const imgsJson = encodeURIComponent(JSON.stringify(pData.images));
-
-                        // Si hay al menos 1 imagen
-                        let mainImgHtml = `<div class="gallery-main-img" onclick="openGallery('${imgsJson}', 0)" style="background-image: url('${pData.images[0]}'); background-size: cover; background-position: top center; border: 1px solid rgba(135,206,250,0.8); box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></div>`;
-                        let sideImgsHtml = '<div class="gallery-side-imgs">';
-
-                        // Si hay al menos 2 imágenes
-                        if (pData.images.length >= 2) {
-                            sideImgsHtml += `<div class="gallery-thumb" onclick="openGallery('${imgsJson}', 1)" style="background-image: url('${pData.images[1]}'); background-size: cover; background-position: top center; border: 1px solid rgba(135,206,250,0.8); box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></div>`;
-                        } else {
-                            sideImgsHtml += `<div class="gallery-thumb placeholder-glare"></div>`;
-                        }
-
-                        // Si hay al menos 3 imágenes
-                        if (pData.images.length >= 3) {
-                            sideImgsHtml += `<div class="gallery-thumb" onclick="openGallery('${imgsJson}', 2)" style="background-image: url('${pData.images[2]}'); background-size: cover; background-position: top center; border: 1px solid rgba(135,206,250,0.8); box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></div>`;
-                        } else {
-                            sideImgsHtml += `<div class="gallery-thumb placeholder-glare"></div>`;
-                        }
-
-                        sideImgsHtml += '</div>';
-                        modalGalleryGrid.innerHTML = mainImgHtml + sideImgsHtml;
-
+                    if (pData.isComingSoon) {
+                        // Modo Proyecto en Desarrollo
+                        modalWindowTitle.innerHTML = `<span class="icon">📄</span> ${pData.windowTitle}`;
+                        modalMainTitle.textContent = pData.mainTitle;
+                        modalDescText.innerHTML = '<div style="display:flex; flex-direction:column; align-items:center; justify-content:center; padding: 40px 0;"><h2 style="color: #ff3333; font-style: italic; font-size: 2rem; margin-bottom: 10px;">🚧 Próximamente 🚧</h2><span style="color:#003366; font-size:1.1rem; font-weight:bold;">(En Desarrollo Activo)</span></div>';
+                        
+                        if(gallerySection) gallerySection.style.display = 'none';
+                        if(specsBox) specsBox.style.display = 'none';
+                        if(specsTitle) specsTitle.style.display = 'none';
+                        if(resourcesSection) resourcesSection.style.display = 'none';
                     } else {
-                        // Renderizar placeholders por defecto
-                        modalGalleryGrid.innerHTML = `
-                            <div class="gallery-main-img placeholder-glare" onclick="alert('No hay capturas disponibles aún')"></div>
-                            <div class="gallery-side-imgs">
-                                <div class="gallery-thumb placeholder-glare"></div>
-                                <div class="gallery-thumb placeholder-glare"></div>
-                            </div>
-                        `;
+                        // Modo Normal
+                        if(gallerySection) gallerySection.style.display = 'block';
+                        if(specsBox) specsBox.style.display = 'block';
+                        if(specsTitle) specsTitle.style.display = 'block';
+                        if(resourcesSection) resourcesSection.style.display = 'block';
+
+                        // Update DOM
+                        modalWindowTitle.innerHTML = `<span class="icon">📄</span> ${pData.windowTitle}`;
+                        modalMainTitle.textContent = pData.mainTitle;
+                        modalDescText.innerHTML = pData.description;
+                        modalTechStack.innerHTML = `<strong>Pila Tecnológica:</strong> ${pData.techStack}`;
+                        modalRole.innerHTML = `<strong>Rol:</strong> ${pData.role}`;
+                        
+                        // Actualizar Enlaces de Recursos
+                        if(btnGithub) {
+                            btnGithub.href = pData.githubLink || '#';
+                            btnGithub.target = (pData.githubLink && pData.githubLink !== '#') ? '_blank' : '_self';
+                        }
+                        if(btnDocs) {
+                            btnDocs.href = pData.docLink || '#';
+                            btnDocs.target = (pData.docLink && pData.docLink !== '#') ? '_blank' : '_self';
+                        }
+
+                        // Actualizar Galería
+                        if (pData.images && pData.images.length > 0) {
+                            // Pasamos el array de imagenes en json a las miniaturas a través de atributos de datos
+                            const imgsJson = encodeURIComponent(JSON.stringify(pData.images));
+
+                            // Si hay al menos 1 imagen
+                            let mainImgHtml = `<div class="gallery-main-img" onclick="openGallery('${imgsJson}', 0)" style="background-image: url('${pData.images[0]}'); background-size: cover; background-position: top center; border: 1px solid rgba(135,206,250,0.8); box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></div>`;
+                            let sideImgsHtml = '<div class="gallery-side-imgs">';
+
+                            // Si hay al menos 2 imágenes
+                            if (pData.images.length >= 2) {
+                                sideImgsHtml += `<div class="gallery-thumb" onclick="openGallery('${imgsJson}', 1)" style="background-image: url('${pData.images[1]}'); background-size: cover; background-position: top center; border: 1px solid rgba(135,206,250,0.8); box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></div>`;
+                            } else {
+                                sideImgsHtml += `<div class="gallery-thumb placeholder-glare"></div>`;
+                            }
+
+                            // Si hay al menos 3 imágenes
+                            if (pData.images.length >= 3) {
+                                sideImgsHtml += `<div class="gallery-thumb" onclick="openGallery('${imgsJson}', 2)" style="background-image: url('${pData.images[2]}'); background-size: cover; background-position: top center; border: 1px solid rgba(135,206,250,0.8); box-shadow: 0 4px 8px rgba(0,0,0,0.1);"></div>`;
+                            } else {
+                                sideImgsHtml += `<div class="gallery-thumb placeholder-glare"></div>`;
+                            }
+
+                            sideImgsHtml += '</div>';
+                            modalGalleryGrid.innerHTML = mainImgHtml + sideImgsHtml;
+
+                        } else {
+                            // Renderizar placeholders por defecto
+                            modalGalleryGrid.innerHTML = `
+                                <div class="gallery-main-img placeholder-glare" onclick="alert('No hay capturas disponibles aún')"></div>
+                                <div class="gallery-side-imgs">
+                                    <div class="gallery-thumb placeholder-glare"></div>
+                                    <div class="gallery-thumb placeholder-glare"></div>
+                                </div>
+                            `;
+                        }
                     }
                 }
 

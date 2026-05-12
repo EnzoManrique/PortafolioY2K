@@ -14,6 +14,7 @@ const misCertificados = [
 // Base de datos de proyectos simulada
 const projectsDb = {
     'simulador-fichas': {
+        isComingSoon: true,
         windowTitle: 'Detalles del Proyecto: Simulador_Fichas.exe',
         mainTitle: 'Simulador de Fichas de Póker',
         description: 'Una aplicación robusta para la gestión y simulación de stacks de fichas de póker. Permite visualizar, calcular balances y organizar distribuciones de fichas con exactitud matemática orientada a torneos de póker texas holdem.',
@@ -89,5 +90,19 @@ const projectsDb = {
             'assets/img/proyectoTTM/promocion.png',
             'assets/img/proyectoTTM/edicionPromocion.png',
         ]
+    },
+    'agent-botanic': {
+        windowTitle: 'Detalles del Proyecto: Agente_Botanico.exe',
+        mainTitle: 'Agente Botánico',
+        description: `Asistente personal para el cuidado de plantas, pensado mobile-first y potenciado por inteligencia artificial. Identifica plantas desde una foto, recuerda los riegos, alerta sobre eventos climáticos extremos y sugiere productos reales del catálogo de Mercado Libre Argentina.<br><br>
+        <b>Inteligencia Artificial Multimodal:</b> Utiliza el ecosistema de Vercel AI SDK junto con Gemini 2.5 Flash para reconocimiento visual de plantas y GPT-4o-mini para el agente conversacional, gestionado a través de Vercel AI Gateway.<br><br>
+        <b>Interacciones Inteligentes:</b> El chat incluye tools que permiten al agente consultar el clima local en tiempo real (Open-Meteo), listar tus plantas, diagnosticar problemas y mostrar productos sugeridos en un carrusel dinámico.<br><br>
+        <b>Arquitectura Serverless:</b> Construido con Next.js 16 (App Router, Server Actions) y React 19. Persistencia de datos mediante Neon Postgres sin ORM, autenticación robusta con Auth.js (OAuth/Credenciales), y soporte i18n para inglés y español.<br><br>
+        <b>PWA y Experiencia Mobile:</b> Diseño mobile-first fluido utilizando Tailwind CSS y shadcn/ui, instalable como aplicación nativa (PWA) para estar siempre a mano.`,
+        techStack: 'Next.js 16, React 19, Vercel AI SDK, Gemini Vision, Neon Postgres, Tailwind CSS, Auth.js.',
+        role: 'Desarrollador Full Stack / AI Engineer',
+        githubLink: 'https://github.com/EnzoManrique/agent-botanic',
+        docLink: 'https://agent-botanic.vercel.app/',
+        images: [] 
     }
 };

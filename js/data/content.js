@@ -104,7 +104,7 @@ const contentData = {
                     <!-- Archivo 1 -->
                     <div class="explorer-item" data-id="simulador-fichas">
                         <div class="explorer-icon-box">
-                            <img src="" alt="" class="explorer-placeholder-icon" style="background: linear-gradient(135deg, #ff9a9a, #ff0000);">
+                            <div class="explorer-placeholder-icon" style="background: linear-gradient(135deg, #ff9a9a, #ff0000);"></div>
                         </div>
                         <div class="explorer-item-details">
                             <span class="explorer-item-name">Simulador_Fichas.exe</span>
@@ -115,7 +115,7 @@ const contentData = {
                     <!-- Archivo 2 -->
                     <div class="explorer-item" data-id="gestor-stock">
                         <div class="explorer-icon-box">
-                            <img src="" alt="" class="explorer-placeholder-icon" style="background: linear-gradient(135deg, #a8ff78, #78ffd6);">
+                            <div class="explorer-placeholder-icon" style="background: linear-gradient(135deg, #a8ff78, #78ffd6);"></div>
                         </div>
                         <div class="explorer-item-details">
                             <span class="explorer-item-name">Gestor Stock e Inventario.php</span>
@@ -126,11 +126,22 @@ const contentData = {
                     <!-- Archivo 3 -->
                     <div class="explorer-item" data-id="ttm-apk">
                         <div class="explorer-icon-box">
-                            <img src="" alt="" class="explorer-placeholder-icon" style="background: linear-gradient(135deg, #74ebd5, #9face6);">
+                            <div class="explorer-placeholder-icon" style="background: linear-gradient(135deg, #74ebd5, #9face6);"></div>
                         </div>
                         <div class="explorer-item-details">
                             <span class="explorer-item-name">TTM.apk</span>
                             <span class="explorer-item-type">Tipo: App Android</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Archivo 4 -->
+                    <div class="explorer-item" data-id="agent-botanic">
+                        <div class="explorer-icon-box">
+                            <div class="explorer-placeholder-icon" style="background: linear-gradient(135deg, #00c6ff, #0072ff);"></div>
+                        </div>
+                        <div class="explorer-item-details">
+                            <span class="explorer-item-name">Agente_Botanico.exe</span>
+                            <span class="explorer-item-type">Tipo: AI Web App</span>
                         </div>
                     </div>
 
