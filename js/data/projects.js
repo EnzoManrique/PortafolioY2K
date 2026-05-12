@@ -103,6 +103,15 @@ const projectsDb = {
         role: 'Desarrollador Full Stack / AI Engineer',
         githubLink: 'https://github.com/EnzoManrique/agent-botanic',
         docLink: 'https://agent-botanic.vercel.app/',
-        images: [] 
+        images: [
+            'assets/img/proyectoBotanic/inicio.png',
+            'assets/img/proyectoBotanic/inicio2.png',
+            'assets/img/proyectoBotanic/jardin.png',
+            'assets/img/proyectoBotanic/detalle_planta.png',
+            'assets/img/proyectoBotanic/escanear.png',
+            'assets/img/proyectoBotanic/escanear2.png',
+            'assets/img/proyectoBotanic/escanear3.png',
+            'assets/img/proyectoBotanic/agente.png'
+        ]
     }
 };
