@@ -14,12 +14,19 @@ const misCertificados = [
 // Base de datos de proyectos simulada
 const projectsDb = {
     'simulador-fichas': {
-        isComingSoon: true,
         windowTitle: 'Detalles del Proyecto: Simulador_Fichas.exe',
         mainTitle: 'Simulador de Fichas de Póker',
-        description: 'Una aplicación robusta para la gestión y simulación de stacks de fichas de póker. Permite visualizar, calcular balances y organizar distribuciones de fichas con exactitud matemática orientada a torneos de póker texas holdem.',
-        techStack: 'Java (Spring Boot), Hibernate, PostgreSQL, JWT, Docker, Git.',
-        role: 'Desarrollador Backend Independiente',
+        description: `Una aplicación robusta para la gestión y simulación de stacks de fichas de póker, orientada a partidas y torneos de Texas Hold'em. Diseñada con un fuerte enfoque en escalabilidad, calidad de software y buenas prácticas backend.<br><br>
+        <b>Arquitectura y Patrones de Diseño:</b><br>
+        - <b>Patrones GoF (Gang of Four):</b> Aplicación de patrones clásicos para resolver la lógica compleja. Uso del patrón <b>State</b> para el ciclo de vida y los estados de las salas de juego, <b>Strategy</b> para ejecutar dinámicamente las reglas de validación de usuarios y códigos de sala, y <b>Builder</b> para la creación limpia e inmutable de objetos.<br>
+        - <b>Arquitectura multicapa (N-Tier):</b> Separación estricta de responsabilidades (Controladores, Servicios, Repositorios) garantizando un código modular e inyectando dependencias mediante el contenedor <b>Singleton</b> de Spring (IoC).<br>
+        - <b>Patrones Estructurales y de Comportamiento:</b> Uso intensivo del patrón <b>DTO (Data Transfer Object)</b> para proteger el dominio, y <b>Chain of Responsibility</b> nativo en los filtros de Spring Security para la autorización de tokens.<br>
+        - <b>Manejo Centralizado de Excepciones:</b> Respuestas API estandarizadas y consistentes mediante <code>@ControllerAdvice</code> para un control robusto de errores HTTP.<br><br>
+        <b>Gestión de Salas (Rooms):</b> Sistema avanzado de validación de salas mediante códigos únicos. Los jugadores se unen a partidas privadas con validaciones transaccionales de capacidad y sincronización de estado.<br><br>
+        <b>Identidad y Seguridad (JWT):</b> Flujo de autenticación <i>stateless</i> que protege los endpoints, garantizando que cada acción dentro del juego esté firmada y estrictamente asociada al jugador correspondiente.<br><br>
+        <b>Estado Actual:</b> El núcleo del backend se encuentra completamente operativo, mientras que el cliente Frontend está en proceso de rediseño de experiencia de usuario (UX/UI).`,
+        techStack: 'Java (Spring Boot), Spring Security, Hibernate, PostgreSQL, JWT, Arquitectura REST, Docker, Git.',
+        role: 'Desarrollador Backend Integrador',
         githubLink: '#',
         docLink: '#',
         images: [] // Sin imágenes todavía, usará placeholders
